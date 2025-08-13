@@ -50,26 +50,16 @@ def lowestCommonAncestor(root, p, q):
     - If both p and q are larger than root, LCA is in right subtree
     - Otherwise, root is the LCA (one node is on each side)
     """
-    # Base case: if root is None
     if not root:
         return None
     
-    # If both nodes are smaller than root, LCA is in left subtree
-    if p.val < root.val and q.val < root.val:
-        return lowestCommonAncestor(root.left, p, q)
-    
-    # If both nodes are larger than root, LCA is in right subtree
-    elif p.val > root.val and q.val > root.val:
+    if p.val > root.val and q.val > root.val:
         return lowestCommonAncestor(root.right, p, q)
-    
-    # Otherwise, root is the LCA
-    # This happens when:
-    # 1. One node is smaller and one is larger than root
-    # 2. One of the nodes is the root itself
+    elif p.val < root.val and q.val < root.val:
+        return lowestCommonAncestor(root.left, p, q)
     else:
         return root
-
-
+    
 class TestLowestCommonAncestor(unittest.TestCase):
     
     def setUp(self):
