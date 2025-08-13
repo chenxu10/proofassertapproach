@@ -16,17 +16,27 @@ import unittest
 
 
 def two_sum(nums, target):
-    ans = []
+    """
+    Find two numbers in the array that add up to target using hash map approach.
+    
+    Args:
+        nums: List of integers
+        target: Target sum
+        
+    Returns:
+        List of two indices [i, j] where nums[i] + nums[j] == target,
+        or None if no solution exists
+    """
     memo = {}
 
-    for index, n in enumerate(nums):
-        complement  = target - n
+    for i, n in enumerate(nums):
+        complement = target - nums[i]
         if complement in memo:
-            ans.append(memo[complement], index)
+            return [memo[complement], i]
         else:
-            memo[n] = index
+            memo[n] = i
 
-    return ans
+    return None
 
 class TestTwoSum(unittest.TestCase):
     
@@ -43,12 +53,7 @@ class TestTwoSum(unittest.TestCase):
         """
         nums = [2, 7, 11, 15]
         target = 9
-        # Expected: algorithm should find indices where nums[i] + nums[j] = target
-        # In this case, nums[0] + nums[1] = 2 + 7 = 9
-        
-        # Test will verify that two_sum(nums, target) returns valid indices
-        # such that nums[result[0]] + nums[result[1]] == target
-        pass
+        assert two_sum(nums, target) == [0,1]
     
     def test_multiple_valid_pairs(self):
         """
