@@ -28,7 +28,6 @@ def kClosest(points: List[List[int]], k: int) -> List[List[int]]:
     
     return result
 
-
 def test_kClosest_basic():
     """Test basic functionality"""
     points = [[1, 1], [2, 2], [3, 3]]
