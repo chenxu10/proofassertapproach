@@ -14,19 +14,16 @@ def kClosest(points: List[List[int]], k: int) -> List[List[int]]:
     Returns:
         List of k closest points to origin
     """
+    # Create heap with (distance, point) tuples
     heap = []
-    
     for point in points:
         x, y = point
         distance = x * x + y * y  # No need for sqrt since we're comparing
         heapq.heappush(heap, (distance, point))
     
-    result = []
-    for _ in range(k):
-        distance, point = heapq.heappop(heap)
-        result.append(point)
+    k_smallest = heapq.nsmallest(k, heap)
     
-    return result
+    return [point for distance, point in k_smallest]
 
 def test_kClosest_basic():
     """Test basic functionality"""
