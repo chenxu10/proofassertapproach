@@ -16,14 +16,16 @@ def kClosest(points: List[List[int]], k: int) -> List[List[int]]:
     """
     # Create heap with (distance, point) tuples
     heap = []
-    for point in points:
+    for i, point in enumerate(points):
         x, y = point
         distance = x * x + y * y  # No need for sqrt since we're comparing
         heapq.heappush(heap, (distance, point))
-    
-    k_smallest = heapq.nsmallest(k, heap)
-    
-    return [point for distance, point in k_smallest]
+        assert len(heap) == i + 1, f"Heap size mismatch at iteration {i}"
+        
+    result = heapq.nsmallest(k, heap)
+    result = [[point[0], point[1]] for distance, point in result]
+    return result
+
 
 def test_kClosest_basic():
     """Test basic functionality"""
