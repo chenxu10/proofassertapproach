@@ -4,16 +4,6 @@ Test cases for Lowest Common Ancestor (LCA) in Binary Search Tree.
 Problem: Given a binary search tree (BST) where all node values are unique, 
 and two nodes from the tree p and q, return the lowest common ancestor (LCA) 
 of the two nodes.
-
-The lowest common ancestor between two nodes p and q is the lowest node in a 
-tree T such that both p and q are descendants. The ancestor is allowed to be 
-a descendant of itself.
-
-Test cases are designed to verify:
-1. Correctness: Algorithm finds the correct LCA
-2. Edge cases: Root as LCA, node as ancestor of itself
-3. Different tree structures: Balanced and unbalanced trees
-4. Various node positions: Left subtree, right subtree, different levels
 """
 
 import unittest
