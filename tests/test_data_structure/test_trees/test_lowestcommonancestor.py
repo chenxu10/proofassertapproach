@@ -48,6 +48,8 @@ def lowestCommonAncestor(root, p, q):
     elif p.val < root.val and q.val < root.val:
         return lowestCommonAncestor(root.left, p, q)
     else:
+        # Invariant: LCA value must be between min(p.val, q.val) and max(p.val, q.val)
+        assert min(p.val, q.val) <= root.val <= max(p.val, q.val), f"LCA invariant violated: {root.val} not between {min(p.val, q.val)} and {max(p.val, q.val)}"
         return root
     
 class TestLowestCommonAncestor(unittest.TestCase):
