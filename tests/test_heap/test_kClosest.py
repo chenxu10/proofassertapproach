@@ -13,19 +13,20 @@ def kClosest(points: List[List[int]], k: int) -> List[List[int]]:
     
     Returns:
         List of k closest points to origin
+   
+    Key property of MinHeap: Parent Node <= Children Node
+
+    assert nums[i] <= nums[2*i+1] and nums[2*i+2]
     """
     # Create heap with (distance, point) tuples
 
     heap = []
-
-    for x,y in points:
+    for x, y in points:
         distance = x ** 2 + y ** 2
-        heapq.heappush(heap, (distance, (x,y)))
+        heapq.heappush(heap, (distance,(x,y)))
 
-    assert len(heap) == len(points)
-
-    result = heapq.nsmallest(k, heap)    
-    result = [[point[0],point[1]] for _, point in result]
+    result = heapq.nsmallest(k, heap)
+    result = [[p[0],p[1]] for d, p in result]
     return result
 
 
