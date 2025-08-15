@@ -106,19 +106,105 @@ import unittest
 
 
 def is_valid_parentheses(s):
+    """
+    Main function to validate parentheses string.
+    
+    Args:
+        s (str): String containing only '(){}[]' characters
+        
+    Returns:
+        bool: True if valid parentheses, False otherwise
+    """
     stack = []
-    mapping = {")":"(","]":"[","}":"{"}
+    mapping = get_bracket_mapping()
+    
+    for char in s:
+        if is_closing_bracket(char):
+            if not can_match_closing_bracket(stack, char, mapping):
+                return False
+        else:
+            push_opening_bracket(stack, char)
+    
+    return is_stack_empty(stack)
 
-    for i in s:
-        if i in mapping:
-            if not stack:
-                return False
-            top = stack.pop()
-            if top != mapping[i]:
-                return False
-        else: #open
-            stack.append(i)
-    return not stack
+
+def get_bracket_mapping():
+    """
+    Returns the mapping of closing brackets to their corresponding opening brackets.
+    
+    Returns:
+        dict: Mapping of closing brackets to opening brackets
+    """
+    return {")": "(", "]": "[", "}": "{"}
+
+
+def is_closing_bracket(char):
+    """
+    Checks if the character is a closing bracket.
+    
+    Args:
+        char (str): Character to check
+        
+    Returns:
+        bool: True if closing bracket, False otherwise
+    """
+    return char in ")}]"
+
+
+def can_match_closing_bracket(stack, closing_bracket, mapping):
+    """
+    Attempts to match a closing bracket with the top of the stack.
+    
+    Args:
+        stack (list): Stack of opening brackets
+        closing_bracket (str): Closing bracket to match
+        mapping (dict): Mapping of closing to opening brackets
+        
+    Returns:
+        bool: True if match successful, False otherwise
+    """
+    if is_stack_empty(stack):
+        return False
+    
+    top_bracket = pop_from_stack(stack)
+    return top_bracket == mapping[closing_bracket]
+
+
+def push_opening_bracket(stack, bracket):
+    """
+    Pushes an opening bracket onto the stack.
+    
+    Args:
+        stack (list): Stack to push onto
+        bracket (str): Opening bracket to push
+    """
+    stack.append(bracket)
+
+
+def pop_from_stack(stack):
+    """
+    Pops and returns the top element from the stack.
+    
+    Args:
+        stack (list): Stack to pop from
+        
+    Returns:
+        str: Top element from stack
+    """
+    return stack.pop()
+
+
+def is_stack_empty(stack):
+    """
+    Checks if the stack is empty.
+    
+    Args:
+        stack (list): Stack to check
+        
+    Returns:
+        bool: True if stack is empty, False otherwise
+    """
+    return len(stack) == 0
 
 
 class TestValidParentheses(unittest.TestCase):
