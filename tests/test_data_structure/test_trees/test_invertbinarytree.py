@@ -69,29 +69,21 @@ def invertTree(root):
     Returns:
         TreeNode - root of the inverted binary tree
     
-    Algorithm:
-    1. Base case: if root is None, return None
-    2. Recursively invert left and right subtrees
-    3. Swap the left and right children of current node
-    4. Return the root
-    
-    Time Complexity: O(n) where n is the number of nodes
-    Space Complexity: O(h) where h is the height of the tree (recursion stack)
+    Heuristics: Master Theorem: T(n) = aT(log(n/b)) + f(n)
     """
     # Base case: empty tree
     if not root:
         return None
     
-    # Recursively invert left and right subtrees
-    left_inverted = invertTree(root.left)
-    right_inverted = invertTree(root.right)
-    
-    # Swap the children
-    root.left = right_inverted
-    root.right = left_inverted
-    
-    return root
+    # aT(log(n/b))
+    right_invert = invertTree(root.right)
+    left_invert = invertTree(root.left)
 
+    # F(n)
+    root.left = right_invert
+    root.right = left_invert
+
+    return root  
 
 class TestInvertBinaryTree(unittest.TestCase):
     
