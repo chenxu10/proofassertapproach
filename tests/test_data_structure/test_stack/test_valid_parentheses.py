@@ -67,44 +67,6 @@ Termination: Algorithm processes each character exactly once, O(n) steps.
 import unittest
 
 
-# def is_valid_parentheses(s):
-#     """
-#     Stack-based algorithm to validate parentheses with proof assertions
-    
-#     Precondition: s is a string containing only '(){}[]' characters
-#     Postcondition: returns True if valid, False otherwise
-#     """
-#     stack = []
-#     mapping = {')': '(', '}': '{', ']': '['}
-    
-#     # Loop invariant: stack contains only unmatched opening brackets
-#     for i, char in enumerate(s):
-#         # Invariant check: stack should only contain opening brackets
-#         assert all(c in '({[' for c in stack), f"Stack invariant violated at position {i}"
-        
-#         if char in mapping:  # closing bracket
-#             # Check if we have a matching opening bracket
-#             if not stack:
-#                 # No opening bracket to match - invalid
-#                 return False
-            
-#             top = stack.pop()
-#             if top != mapping[char]:
-#                 # Wrong type of opening bracket - invalid  
-#                 return False
-                
-#             # Assertion: we successfully matched a pair
-#             assert top == mapping[char], "Matching assertion failed"
-            
-#         else:  # opening bracket
-#             # Push opening bracket onto stack
-#             stack.append(char)
-            
-#     # Final check: all brackets should be matched (empty stack)
-#     return len(stack) == 0
-
-
-
 def is_valid_parentheses(s):
     """
     Main function to validate parentheses string.
