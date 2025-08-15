@@ -29,12 +29,12 @@ def two_sum(nums, target):
     """
     memo = {}
 
-    for i, n in enumerate(nums):
+    for i, e in enumerate(nums):
         complement = target - nums[i]
         if complement in memo:
             return [memo[complement], i]
         else:
-            memo[n] = i
+            memo[e] = i
 
     return None
 
