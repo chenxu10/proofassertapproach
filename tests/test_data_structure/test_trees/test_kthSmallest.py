@@ -17,7 +17,6 @@ Test cases are designed to verify:
 """
 
 import unittest
-import heapq
 from typing import Optional
 
 
