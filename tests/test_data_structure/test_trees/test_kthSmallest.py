@@ -17,7 +17,6 @@ Test cases are designed to verify:
 """
 
 import unittest
-import heapq
 from typing import Optional
 
 
@@ -32,7 +31,7 @@ class TreeNode:
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         """
-        Find the kth smallest element in a BST.
+        Find the kth smallest element in a BST using in-order traversal.
         
         Args:
             root: Optional[TreeNode] - root of the BST
@@ -41,24 +40,30 @@ class Solution:
         Returns:
             int - the kth smallest value in the BST
         
-        TODO: Implement this function
-        Hints: 
-        - In-order traversal of BST gives sorted sequence
-        - Can use iterative or recursive approach
-        - Consider early termination when kth element is found
+        In-order traversal of BST visits nodes in sorted order.
+        We can stop early once we find the kth element.
         """
-        heap = []
-        def dfs(node):
-            if not node:
-                return None
-            else:
-                heapq.heappush(heap, node.val)
-                dfs(node.left)
-                dfs(node.right)
-            return
-
-        dfs(root)
-        return heapq.nsmallest(k, heap)[-1]
+        self.count = 0
+        self.result = None
+        
+        def inorder(node):
+            if not node or self.result is not None:
+                return
+            
+            # Traverse left subtree
+            inorder(node.left)
+            
+            # Process current node
+            self.count += 1
+            if self.count == k:
+                self.result = node.val
+                return
+            
+            # Traverse right subtree
+            inorder(node.right)
+        
+        inorder(root)
+        return self.result
 
 
 class TestKthSmallest(unittest.TestCase):
