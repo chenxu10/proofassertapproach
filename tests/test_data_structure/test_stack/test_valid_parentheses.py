@@ -107,22 +107,17 @@ import unittest
 
 def is_valid_parentheses(s):
     stack = []
-    mapping = {
-        "}":"{",
-        ")":"(",
-        "]":"["}
+    mapping = {")":"(","]":"[","}":"{"}
 
-    for char in (s):
-        assert all(c in '{[(' for c in stack)
-        if char in mapping:
+    for i in s:
+        if i in mapping:
             if not stack:
                 return False
             top = stack.pop()
-            if top != mapping[char]:
+            if top != mapping[i]:
                 return False
-        else:
-            stack.append(char)
-
+        else: #open
+            stack.append(i)
     return not stack
 
 
