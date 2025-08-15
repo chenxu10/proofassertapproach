@@ -85,6 +85,45 @@ def invertTree(root):
 
     return root  
 
+
+def invertTreeIterative(root):
+    """
+    Alternative solution: Invert a binary tree using iterative BFS approach.
+    
+    Args:
+        root: TreeNode - root of the binary tree to invert
+    
+    Returns:
+        TreeNode - root of the inverted binary tree
+    
+    Time Complexity: O(n) - visit each node once
+    Space Complexity: O(w) where w is maximum width of tree (queue size)
+    
+    This approach uses a queue to traverse the tree level by level,
+    swapping left and right children at each node.
+    """
+    if not root:
+        return None
+    
+    # Use queue for BFS traversal
+    queue = [root]
+    
+    while queue:
+        # Process current node
+        current = queue.pop(0)
+        
+        # Swap left and right children
+        current.left, current.right = current.right, current.left
+        
+        # Add children to queue for processing (if they exist)
+        if current.left:
+            queue.append(current.left)
+            
+        if current.right:
+            queue.append(current.right)
+    
+    return root
+
 class TestInvertBinaryTree(unittest.TestCase):
     
     def test_invert_balanced_tree(self):
@@ -241,6 +280,43 @@ class TestInvertBinaryTree(unittest.TestCase):
         self.assertEqual(inverted_root.right.right.val, 4)
         self.assertEqual(inverted_root.left.left.left.val, 7)
         self.assertEqual(inverted_root.left.left.right.val, 6)
+
+    def test_compare_recursive_vs_iterative(self):
+        """
+        Test Case 6: Compare recursive vs iterative implementations
+        
+        This test ensures both the recursive and iterative implementations
+        produce identical results for the same input tree.
+        """
+        # Create test tree
+        root1 = TreeNode(1)
+        root1.left = TreeNode(2)
+        root1.right = TreeNode(3)
+        root1.left.left = TreeNode(4)
+        root1.left.right = TreeNode(5)
+        
+        # Create identical copy for second approach
+        root2 = TreeNode(1)
+        root2.left = TreeNode(2)
+        root2.right = TreeNode(3)
+        root2.left.left = TreeNode(4)
+        root2.left.right = TreeNode(5)
+        
+        # Apply both approaches
+        recursive_result = invertTree(root1)
+        iterative_result = invertTreeIterative(root2)
+        
+        # Convert to lists for easy comparison
+        recursive_list = recursive_result.to_list_level_order()
+        iterative_list = iterative_result.to_list_level_order()
+        
+        # Both should produce identical results
+        self.assertEqual(recursive_list, iterative_list)
+        
+        # Verify the actual inverted structure
+        expected = [1, 3, 2, None, None, 5, 4]
+        self.assertEqual(recursive_list, expected)
+        self.assertEqual(iterative_list, expected)
 
 
 if __name__ == '__main__':
