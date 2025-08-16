@@ -81,7 +81,7 @@ def is_valid_parentheses(s):
     mapping = {")":"(","]":"[","}":"{"}
 
 
-    # ")(("
+    # ")())"
     for c in s:
         # close
         if c in mapping:
