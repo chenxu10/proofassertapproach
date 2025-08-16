@@ -1,4 +1,35 @@
 def exist(board, word):
+    """
+    Search for a word in a 2D board using backtracking.
+    
+    Backtracking Tree Example - searching "CAT" in board:
+    [['C','A','T'],
+     ['B','A','D'], 
+     ['E','F','G']]
+    
+    Tree structure shows recursive exploration:
+    
+                    Start: Find 'C'
+                         |
+                    (0,0) 'C' ✓
+                    /   |   \   \
+               right  down  left  up
+                 |     |     |     |
+            (0,1) 'A' ✓  (1,0) 'B' ✗  ...bounds...  ...bounds...
+            /  |  \  \
+       right down left up
+         |    |    |    |
+    (0,2) 'T' ✓  ...  (0,0) visited ✗  ...bounds...
+         |
+      FOUND! backtrack
+      
+    Key concepts:
+    - Each node represents a cell position and character match
+    - ✓ means character matches, ✗ means no match or invalid
+    - Visited cells are marked to prevent cycles  
+    - When path fails, algorithm backtracks and tries next direction
+    - Success when word length reached, failure when no valid paths remain
+    """
     if not board or not board[0] or not word:
         return False
     
@@ -21,13 +52,19 @@ def exist(board, word):
             return False
         
         visited.add((r, c))
-        found = any(backtrack(r + dr, c + dc, i + 1) 
-                   for dr, dc in [(0, 1), (1, 0), (0, -1), (-1, 0)])
+        for dr, dc in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+            if backtrack(r + dr, c + dc, i + 1):
+                return True
         visited.remove((r, c))
-        return found
+        return False
     
-    return any(backtrack(i, j, 0) for i in range(rows) for j in range(cols) 
-              if board[i][j] == word[0])
+    for r in range(rows):
+        for c in range(cols):
+            if backtrack(r, c, 0):
+                return True
+            
+    return False
+
 
 
 def test_exist():
