@@ -35,22 +35,16 @@ def word_break(s, word_dict):
                               |
                          wordBreak("") = True
     """
+    wordset = set(word_dict)
     n = len(s)
-    word_set = set(word_dict)
-    
-    # dp[i] = True if the first i characters of s can be segmented into dictionary words
-    dp = [False] * (n + 1)
-      # Empty string can always be segmented
-    dp[0] = True
+    dp = [False] * (n + 1) 
+    dp[0] = True 
 
-    for i in range(1, n + 1):
+    for i in range(1,n+1):
         for j in range(i):
-            # dp[j] = True means s[0:j] can be segmented
-            # Check if s[j:i] is in dictionary to segment s[0:i]
-            if dp[j] and s[j:i] in word_set:
+            if dp[j] and s[j:i] in wordset:        
                 dp[i] = True
                 break
-    
     return dp[n]
 
 class TestWordBreak:
