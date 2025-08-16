@@ -78,17 +78,24 @@ def is_valid_parentheses(s):
         bool: True if valid parentheses, False otherwise
     """
     stack = []
-    mapping = get_bracket_mapping()
-    
-    for char in s:
-        if is_closing_bracket(char):
-            if not can_match_closing_bracket(stack, char, mapping):
+    mapping = {")":"(","]":"[","}":"{"}
+
+
+    # ")("
+    for c in s:
+        # close
+        if c in mapping:
+            # wrong order case
+            if not stack:
+                return False
+            top_bracket = stack.pop()
+            if top_bracket != mapping[c]:
                 return False
         else:
-            push_opening_bracket(stack, char)
-    
-    return is_stack_empty(stack)
+        # open
+            stack.append(c)
 
+    return not stack
 
 def get_bracket_mapping():
     """
