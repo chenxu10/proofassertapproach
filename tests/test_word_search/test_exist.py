@@ -52,10 +52,11 @@ def exist(board, word):
             return False
         
         visited.add((r, c))
-        found = any(backtrack(r + dr, c + dc, i + 1) 
-                   for dr, dc in [(0, 1), (1, 0), (0, -1), (-1, 0)])
+        for dr, dc in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+            if backtrack(r + dr, c + dc, i + 1):
+                return True
         visited.remove((r, c))
-        return found
+        return False
     
     for r in range(rows):
         for c in range(cols):

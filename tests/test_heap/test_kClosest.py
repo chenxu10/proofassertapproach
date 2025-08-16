@@ -7,16 +7,42 @@ def kClosest(points: List[List[int]], k: int) -> List[List[int]]:
     """
     Find the k closest points to the origin using a min-heap.
     
+    Heap-based Algorithm Flow Example - finding k=2 closest points:
+    Input: points = [[3,3], [5,-1], [-2,4]], k = 2
+    
+    Step 1: Calculate distances and build heap
+    Points → Distance² → Heap Entry
+    [3,3]  → 3²+3² = 18 → (18, (3,3))
+    [5,-1] → 5²+(-1)² = 26 → (26, (5,-1))  
+    [-2,4] → (-2)²+4² = 20 → (20, (-2,4))
+    
+    Step 2: Min-Heap structure (distance², point):
+                    (18, (3,3))
+                   /            \
+            (26, (5,-1))    (20, (-2,4))
+    
+    Step 3: Extract k=2 smallest using heapq.nsmallest():
+    
+    Heap traversal finds 2 smallest distances:
+    1st smallest: (18, (3,3))  ← distance² = 18
+    2nd smallest: (20, (-2,4)) ← distance² = 20
+    
+    Step 4: Transform result format:
+    [(18, (3,3)), (20, (-2,4))] → [[3,3], [-2,4]]
+    
+    Key concepts:
+    - Distance calculated as x²+y² (no sqrt needed for comparison)
+    - Min-heap automatically maintains smallest distance at root
+    - heapq.nsmallest(k) efficiently finds k smallest without full sort
+    - Result maintains relative order of distances from origin
+    - Time: O(n log n), Space: O(n) where n = len(points)
+    
     Args:
         points: List of [x, y] coordinates
         k: Number of closest points to return
     
     Returns:
         List of k closest points to origin
-   
-    Key property of MinHeap: Parent Node <= Children Node
-
-    assert nums[i] <= nums[2*i+1] and nums[2*i+2]
     """
     # Create heap with (distance, point) tuples
 
