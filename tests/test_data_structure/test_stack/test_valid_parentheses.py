@@ -85,6 +85,7 @@ def is_valid_parentheses(s):
     for c in s:
         # close
         if c in mapping:
+            # wrong order case
             if not stack:
                 return False
             top_bracket = stack.pop()
