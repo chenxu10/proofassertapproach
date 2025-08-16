@@ -97,9 +97,6 @@ def is_valid_parentheses(s):
 
     return not stack
 
-
-
-
 def get_bracket_mapping():
     """
     Returns the mapping of closing brackets to their corresponding opening brackets.
