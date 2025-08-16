@@ -57,7 +57,7 @@ class Solution:
             self.count += 1
             if self.count == k:
                 self.result = node.val
-                return
+                return  
             
             # Traverse right subtree
             inorder(node.right)
