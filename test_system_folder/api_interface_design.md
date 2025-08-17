@@ -1,4 +1,5 @@
 {url}/{resource}/{parameter}
+{url}/{resource}/{parameter}
 
 JSON
 {

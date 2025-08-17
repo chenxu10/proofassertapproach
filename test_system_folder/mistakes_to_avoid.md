@@ -1,0 +1,1 @@
+Time managemetn is the key. Do not dive into too much details until they tell you do.
