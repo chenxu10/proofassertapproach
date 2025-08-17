@@ -64,16 +64,18 @@ def cloneGraph(node: Optional[Node]) -> Optional[Node]:
     visited = {}
     
     def dfs(original_node):
+        # Check visited
         if original_node in visited:
             return visited[original_node]
-        
+        # Actual operation
         cloned_node = Node(original_node.val)
+        # Add to visited
         visited[original_node] = cloned_node
-        
-        for neighbor in original_node.neighbors:
-            cloned_neighbor = dfs(neighbor)
-            cloned_node.neighbors.append(cloned_neighbor)
-        
+        # Recursive dfs logic
+        for nei in original_node.neighbors:
+            cloned_nei = dfs(nei)
+            cloned_node.neighbors.append(cloned_nei)
+
         return cloned_node
     
     return dfs(node)
@@ -269,3 +271,49 @@ def graph_to_adjacency_list(node: Optional[Node]) -> List[List[int]]:
         result[val - 1] = sorted(neighbors)
     
     return result
+
+
+if __name__ == "__main__":
+    test_suite = TestCloneGraph()
+    
+    print("Running clone graph tests...")
+    print("=" * 50)
+    
+    try:
+        test_suite.test_four_node_cycle()
+        print("✓ test_four_node_cycle passed")
+    except Exception as e:
+        print(f"✗ test_four_node_cycle failed: {e}")
+    
+    try:
+        test_suite.test_single_node()
+        print("✓ test_single_node passed")
+    except Exception as e:
+        print(f"✗ test_single_node failed: {e}")
+    
+    try:
+        test_suite.test_two_node_graph()
+        print("✓ test_two_node_graph passed")
+    except Exception as e:
+        print(f"✗ test_two_node_graph failed: {e}")
+    
+    try:
+        test_suite.test_triangle_graph()
+        print("✓ test_triangle_graph passed")
+    except Exception as e:
+        print(f"✗ test_triangle_graph failed: {e}")
+    
+    try:
+        test_suite.test_empty_graph()
+        print("✓ test_empty_graph passed")
+    except Exception as e:
+        print(f"✗ test_empty_graph failed: {e}")
+    
+    try:
+        test_suite.test_linear_graph()
+        print("✓ test_linear_graph passed")
+    except Exception as e:
+        print(f"✗ test_linear_graph failed: {e}")
+    
+    print("=" * 50)
+    print("All tests completed!")
