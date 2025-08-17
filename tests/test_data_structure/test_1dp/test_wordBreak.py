@@ -45,6 +45,7 @@ def word_break(s, word_dict):
             if dp[j] and s[j:i] in word_set:
                 dp[i] = True
                 break
+
     # if dp[j] and s[j:i] dp[i] = True
     return dp[n]
 
