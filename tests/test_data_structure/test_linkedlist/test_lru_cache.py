@@ -86,11 +86,15 @@ class LRUCache:
         
         TODO: Implement initialization
         """
-        # TODO: Store capacity
-        # TODO: Create hash table for O(1) key access
-        # TODO: Create dummy head and tail nodes
-        # TODO: Connect head.next = tail, tail.prev = head
-        pass
+        if capacity <= 0:
+            return ValueError("Capacity must larger than 0")
+        self.capacity = capacity
+        self.cache = {}
+        self.head = ListNode()
+        self.tail = ListNode()
+        self.head.next = self.tail
+        self.tail.prev = self.head
+ 
 
     def _add_to_head(self, node: ListNode) -> None:
         """
@@ -205,7 +209,9 @@ class TestLRUCache:
         # TODO: Add assertions to verify proper initialization
         lru_cache = LRUCache(1)
         assert lru_cache.capacity == 1
-        assert len(lru_cache.cache) == 0
+
+        with pytest.raises(ValueError):
+            LRUCache(-1)
 
     def test_empty_cache_get(self):
         """Test getting from empty cache"""
