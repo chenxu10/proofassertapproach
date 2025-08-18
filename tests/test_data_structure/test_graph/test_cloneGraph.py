@@ -94,9 +94,11 @@ class TestCloneGraph:
         node2 = Node(2)
         node3 = Node(3)
         #   - Each node connects to the other 2 nodes
-        node1.neighbors = Node(2)
-        node1.neighbors = Node(3)
+        node1.neighbors = [Node(2),Node(3)]
+        node2.neighbors = [Node(1),Node(3)]
+        node3.neighbors = [Node(2),Node(3)]
         #   - Clone the graph starting from node1
+        
         #   - Verify cloned node1 exists and has correct value
         #   - Verify cloned node1 is different object from original
         #   - Verify cloned node1 has 2 neighbors
