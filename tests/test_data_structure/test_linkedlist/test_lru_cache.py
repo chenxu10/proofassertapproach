@@ -215,11 +215,6 @@ class TestLRUCache:
 
     def test_empty_cache_get(self):
         """Test getting from empty cache"""
-        # STORAGE STRENGTHENING: What should empty cache return?
-        # TODO: Create cache and test get on non-existent key
-        # TODO: Add assertion for expected return value
-        pass
-
         lru_cache = LRUCache(1)
         lru_cache.put(2)
         assert lru_cache.get(1) == -1
