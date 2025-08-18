@@ -220,6 +220,10 @@ class TestLRUCache:
         # TODO: Add assertion for expected return value
         pass
 
+        lru_cache = LRUCache(1)
+        lru_cache.put(2)
+        assert lru_cache.get(1) == None
+
     # CATEGORY 2: BASIC OPERATIONS
     def test_single_put_get(self):
         """Test basic put and get operations"""
