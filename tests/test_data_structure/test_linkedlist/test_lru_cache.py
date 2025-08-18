@@ -25,6 +25,66 @@ class LRUCache:
     This does NOT fit Master Theorem form T(n) = aT(n/b) + f(n)
     because it's data structure operations, not divide-and-conquer.
     
+    LRU CACHE VISUALIZATION:
+    ========================
+    
+    INITIAL STATE (Empty Cache, Capacity = 3):
+    
+    Hash Table (cache):     Doubly Linked List:
+    ┌──────────────────┐    ┌──────┐    ┌──────┐
+    │     cache: {}    │    │ HEAD │◄──►│ TAIL │
+    │                  │    │(dummy)    │(dummy)│
+    └──────────────────┘    └──────┘    └──────┘
+    
+    AFTER put(1, 100):
+    
+    Hash Table:             Doubly Linked List:
+    ┌──────────────────┐    ┌──────┐    ┌─────────┐    ┌──────┐
+    │ cache: {         │    │ HEAD │◄──►│ k:1,v:100│◄──►│ TAIL │
+    │   1 → Node(1,100)│    │(dummy)    │  (MRU)   │    │(dummy)│
+    │ }                │    └──────┘    └─────────┘    └──────┘
+    └──────────────────┘         ▲            ▲            ▲
+                                 │            │            │
+                         Hash table points to this node
+    
+    AFTER put(2, 200):
+    
+    Hash Table:             Doubly Linked List:
+    ┌──────────────────┐    ┌──────┐    ┌─────────┐    ┌─────────┐    ┌──────┐
+    │ cache: {         │    │ HEAD │◄──►│ k:2,v:200│◄──►│ k:1,v:100│◄──►│ TAIL │
+    │   1 → Node(1,100)│    │(dummy)    │  (MRU)   │    │  (LRU)   │    │(dummy)│
+    │   2 → Node(2,200)│    └──────┘    └─────────┘    └─────────┘    └──────┘
+    │ }                │         ▲            ▲            ▲            ▲
+    └──────────────────┘         │     Hash points here   │            │
+                                 │                        │            │
+                         Most Recently Used        Least Recently Used
+    
+    AFTER get(1):  // Moves key 1 to head (most recently used)
+    
+    Hash Table:             Doubly Linked List:
+    ┌──────────────────┐    ┌──────┐    ┌─────────┐    ┌─────────┐    ┌──────┐
+    │ cache: {         │    │ HEAD │◄──►│ k:1,v:100│◄──►│ k:2,v:200│◄──►│ TAIL │
+    │   1 → Node(1,100)│    │(dummy)    │  (MRU)   │    │  (LRU)   │    │(dummy)│
+    │   2 → Node(2,200)│    └──────┘    └─────────┘    └─────────┘    └──────┘
+    │ }                │
+    └──────────────────┘    Usage order changed: 1 is now MRU, 2 is now LRU
+    
+    AFTER put(3, 300) with capacity=2:  // Evicts LRU (key 2)
+    
+    Hash Table:             Doubly Linked List:
+    ┌──────────────────┐    ┌──────┐    ┌─────────┐    ┌─────────┐    ┌──────┐
+    │ cache: {         │    │ HEAD │◄──►│ k:3,v:300│◄──►│ k:1,v:100│◄──►│ TAIL │
+    │   1 → Node(1,100)│    │(dummy)    │  (MRU)   │    │  (LRU)   │    │(dummy)│
+    │   3 → Node(3,300)│    └──────┘    └─────────┘    └─────────┘    └──────┘
+    │ }                │
+    └──────────────────┘    Key 2 was evicted (removed from both hash table and list)
+    
+    KEY INSIGHTS:
+    - Hash table provides O(1) access to any node
+    - Doubly linked list maintains usage order (MRU at head, LRU at tail)
+    - Dummy head/tail simplify insertion/deletion (no null checks)
+    - Both structures stay synchronized during all operations
+    
     COGNITIVE LOAD ANALYSIS (Following Laws of Nature):
     - Constructor parameters: 1 (follows 7±2 rule)
     - Method parameters: ≤2 per method (within cognitive limits)
@@ -102,8 +162,30 @@ class LRUCache:
         
         STORAGE STRENGTHENING EXERCISE:
         Visualize the doubly linked list operations:
-        Before: head <-> node1 <-> ... 
-        After:  head <-> new_node <-> node1 <-> ...
+        
+        BEFORE:
+        ┌──────┐    ┌─────────┐    ┌─────────┐    ┌──────┐
+        │ HEAD │◄──►│ old_first│◄──►│   ...   │◄──►│ TAIL │
+        │(dummy)    │          │    │         │    │(dummy)│
+        └──────┘    └─────────┘    └─────────┘    └──────┘
+        
+        NEW NODE TO INSERT:
+        ┌─────────┐
+        │new_node │
+        │         │
+        └─────────┘
+        
+        AFTER:
+        ┌──────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌──────┐
+        │ HEAD │◄──►│new_node │◄──►│ old_first│◄──►│   ...   │◄──►│ TAIL │
+        │(dummy)    │  (MRU)  │    │          │    │         │    │(dummy)│
+        └──────┘    └─────────┘    └─────────┘    └─────────┘    └──────┘
+        
+        STEPS NEEDED:
+        1. new_node.prev = head
+        2. new_node.next = head.next  
+        3. head.next.prev = new_node
+        4. head.next = new_node
         
         What connections need to be updated?
         TODO: Implement adding node after head
@@ -119,8 +201,27 @@ class LRUCache:
         
         STORAGE STRENGTHENING EXERCISE:
         Think about pointer manipulation:
-        Before: prev_node <-> target_node <-> next_node
-        After:  prev_node <-> next_node
+        
+        BEFORE:
+        ┌─────────┐    ┌─────────┐    ┌─────────┐
+        │prev_node│◄──►│target   │◄──►│next_node│
+        │         │    │ (remove)│    │         │
+        └─────────┘    └─────────┘    └─────────┘
+        
+        AFTER:
+        ┌─────────┐                   ┌─────────┐
+        │prev_node│◄─────────────────►│next_node│
+        │         │                   │         │
+        └─────────┘                   └─────────┘
+        
+        ┌─────────┐
+        │target   │ ← Isolated (ready for garbage collection)
+        │ (removed)│
+        └─────────┘
+        
+        STEPS NEEDED:
+        1. node.prev.next = node.next
+        2. node.next.prev = node.prev
         
         TODO: Implement node removal
         """
@@ -134,6 +235,30 @@ class LRUCache:
         
         STORAGE STRENGTHENING EXERCISE:
         This combines two operations - can you identify them?
+        
+        BEFORE (node is somewhere in middle):
+        ┌──────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌──────┐
+        │ HEAD │◄──►│  node3  │◄──►│  target │◄──►│  node1  │◄──►│ TAIL │
+        │(dummy)    │         │    │ (move)  │    │         │    │(dummy)│
+        └──────┘    └─────────┘    └─────────┘    └─────────┘    └──────┘
+        
+        STEP 1: Remove from current position
+        ┌──────┐    ┌─────────┐                   ┌─────────┐    ┌──────┐
+        │ HEAD │◄──►│  node3  │◄─────────────────►│  node1  │◄──►│ TAIL │
+        │(dummy)    │         │                   │         │    │(dummy)│
+        └──────┘    └─────────┘                   └─────────┘    └──────┘
+        
+        ┌─────────┐
+        │  target │ ← Temporarily isolated
+        │ (move)  │
+        └─────────┘
+        
+        STEP 2: Add to head position  
+        ┌──────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌──────┐
+        │ HEAD │◄──►│  target │◄──►│  node3  │◄──►│  node1  │◄──►│ TAIL │
+        │(dummy)    │  (MRU)  │    │         │    │         │    │(dummy)│
+        └──────┘    └─────────┘    └─────────┘    └─────────┘    └──────┘
+        
         TODO: Use existing helper methods
         """
         # TODO: Remove node from current position
