@@ -75,20 +75,7 @@ class TestCloneGraph:
     
     def test_single_isolated_node(self):
         """Base case: single node with no connections"""
-        # SETUP: Create node1 = Node(1) with empty neighbors list
-        # ACTION: Clone the single node
-        # EXPECTED: New node with same value but different object reference
-        # ASSERTIONS TO IMPLEMENT:
-        #   node1 = Node(1)  # neighbors = [] by default
-        #   cloned = cloneGraph(node1)
-        #   assert cloned is not None
-        #   assert cloned.val == 1
-        #   assert cloned is not node1  # Different objects
-        #   assert len(cloned.neighbors) == 0
-        #   assert len(node1.neighbors) == 0  # Original unchanged
-
         node = Node(1)
-
         clone_node = cloneGraph(node)
         assert clone_node.val == 1
         assert clone_node.neighbors == None
