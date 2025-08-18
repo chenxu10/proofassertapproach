@@ -77,6 +77,8 @@ def cloneGraph(node: Optional[Node]) -> Optional[Node]:
     - Forgetting to connect cloned neighbors properly
     """
 
+    if node is None:
+        return None
 
 
 
