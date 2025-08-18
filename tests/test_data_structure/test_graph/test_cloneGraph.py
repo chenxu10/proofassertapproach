@@ -102,6 +102,7 @@ class TestCloneGraph:
         """Base case: single node with no connections"""
         node = Node(1)
         clone_node = cloneGraph(node)
+        assert len(clone_node.neighbors) == 0
 
     
     def test_triangle_complete(self):
