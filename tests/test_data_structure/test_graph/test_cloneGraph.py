@@ -86,7 +86,12 @@ class TestCloneGraph:
         #   assert cloned is not node1  # Different objects
         #   assert len(cloned.neighbors) == 0
         #   assert len(node1.neighbors) == 0  # Original unchanged
-        pass
+
+        node = Node(1)
+
+        clone_node = cloneGraph(node)
+        assert clone_node.val == 1
+        assert clone_node.neighbors == None
     
     def test_triangle_complete(self):
         """Simple cycle: triangular graph"""
