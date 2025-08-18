@@ -89,49 +89,21 @@ class TestCloneGraph:
         # ACTION: Clone starting from node1
         # EXPECTED: Complete triangle clone with preserved relationships
         # ASSERTIONS TO IMPLEMENT:
-        #   # Create original triangle
-        #   node1, node2, node3 = Node(1), Node(2), Node(3)
-        #   node1.neighbors = [node2, node3]
-        #   node2.neighbors = [node1, node3]  
-        #   node3.neighbors = [node1, node2]
-        #   
-        #   # Clone the graph
-        #   cloned1 = cloneGraph(node1)
-        #   
-        #   # Verify cloned node1
-        #   assert cloned1 is not None
-        #   assert cloned1.val == 1
-        #   assert cloned1 is not node1
-        #   assert len(cloned1.neighbors) == 2
-        #   
-        #   # Get cloned neighbors (order may vary)
-        #   cloned_neighbors = cloned1.neighbors
-        #   cloned_vals = [n.val for n in cloned_neighbors]
-        #   assert 2 in cloned_vals and 3 in cloned_vals
-        #   
-        #   # Verify each cloned neighbor is different object
-        #   for neighbor in cloned_neighbors:
-        #       assert neighbor is not node2 and neighbor is not node3
-        #   
-        #   # Verify triangle structure: each node connects to other 2
-        #   cloned2 = next(n for n in cloned_neighbors if n.val == 2)
-        #   cloned3 = next(n for n in cloned_neighbors if n.val == 3)
-        #   
-        #   # Check cloned2 neighbors
-        #   assert len(cloned2.neighbors) == 2
-        #   cloned2_vals = [n.val for n in cloned2.neighbors]
-        #   assert 1 in cloned2_vals and 3 in cloned2_vals
-        #   
-        #   # Check cloned3 neighbors  
-        #   assert len(cloned3.neighbors) == 2
-        #   cloned3_vals = [n.val for n in cloned3.neighbors]
-        #   assert 1 in cloned3_vals and 2 in cloned3_vals
-        #   
-        #   # Verify references point to cloned objects, not originals
-        #   assert cloned1 in cloned2.neighbors
-        #   assert cloned1 in cloned3.neighbors
-        #   assert cloned2 in cloned1.neighbors
-        #   assert cloned3 in cloned1.neighbors
+        #   - Create original triangle with 3 nodes
+        node1 = Node(1)
+        node2 = Node(2)
+        node3 = Node(3)
+        #   - Each node connects to the other 2 nodes
+        node1.neighbors = Node(2)
+        node1.neighbors = Node(3)
+        #   - Clone the graph starting from node1
+        #   - Verify cloned node1 exists and has correct value
+        #   - Verify cloned node1 is different object from original
+        #   - Verify cloned node1 has 2 neighbors
+        #   - Verify neighbor values are 2 and 3
+        #   - Verify cloned neighbors are different objects from originals
+        #   - Verify triangle structure: each cloned node connects to other 2
+        #   - Verify references point to cloned objects, not originals
         pass
 
 def build_graph_from_adjacency_list(adj_list: List[List[int]]) -> Optional[Node]:
