@@ -222,7 +222,8 @@ class TestLRUCache:
 
         lru_cache = LRUCache(1)
         lru_cache.put(2)
-        assert lru_cache.get(1) == None
+        assert lru_cache.get(1) == -1
+        assert lru_cache.get(0) == -1
 
     # CATEGORY 2: BASIC OPERATIONS
     def test_single_put_get(self):
