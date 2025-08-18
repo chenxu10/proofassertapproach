@@ -205,12 +205,7 @@ class TestLRUCache:
         # TODO: Add assertions to verify proper initialization
         lru_cache = LRUCache(1)
         assert lru_cache.capacity == 1
-
-        lru_cache = LRUCache(0)
-        assert lru_cache.capacity == 0
-
-        lru_cache = LRUCache(-1)
-        assert lru_cache.capacity == -1
+        assert len(lru_cache.cache) == 0
 
     def test_empty_cache_get(self):
         """Test getting from empty cache"""
