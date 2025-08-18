@@ -87,7 +87,7 @@ def cloneGraph(node: Optional[Node]) -> Optional[Node]:
             return visited[original_node]
         else:
             # clone
-            clone_node = Node(original_node)
+            clone_node = Node(original_node.val)
             # add to visit
             visited[original_node] = clone_node
 
