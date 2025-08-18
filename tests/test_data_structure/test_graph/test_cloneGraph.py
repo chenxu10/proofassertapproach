@@ -79,11 +79,20 @@ def cloneGraph(node: Optional[Node]) -> Optional[Node]:
 
     if node is None:
         return None
+    
+    visited = {}
 
+    def dfs(original_node):
+        if original_node in visited:
+            return visited[original_node]
+        else:
+            clone_node = Node(original_node.val)
+            visited[original_node] = clone_node
+            for nei in original_node.neighbors:
+                clone_node.neighbors.append(nei.val)
+                dfs(nei)
 
-
-    # TODO: Implement following the 5-step guidance above
-    pass
+    return dfs(node)
 
 class TestCloneGraph:
     
