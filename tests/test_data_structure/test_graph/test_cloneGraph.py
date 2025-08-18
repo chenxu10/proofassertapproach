@@ -92,6 +92,8 @@ def cloneGraph(node: Optional[Node]) -> Optional[Node]:
                 clone_node.neighbors.append(nei.val)
                 dfs(nei)
 
+            return dfs(node)
+        
     return dfs(node)
 
 class TestCloneGraph:
