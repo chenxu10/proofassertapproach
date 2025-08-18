@@ -77,11 +77,6 @@ def cloneGraph(node: Optional[Node]) -> Optional[Node]:
     - Forgetting to connect cloned neighbors properly
     """
 
-    if node is None:
-        return None
-    
-    visited = {}
-
     def dfs(original_node):
         if original_node in visited:
             return visited[original_node]
@@ -93,8 +88,12 @@ def cloneGraph(node: Optional[Node]) -> Optional[Node]:
                 clone_node.neighbors.append(clone_neighbor)
 
             return clone_node
-        
-    return dfs(node)
+    
+    if node is None:
+        return None
+    else:
+        visited = {}
+        return dfs(node)
 
 class TestCloneGraph:
     
