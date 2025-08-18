@@ -89,10 +89,10 @@ def cloneGraph(node: Optional[Node]) -> Optional[Node]:
             clone_node = Node(original_node.val)
             visited[original_node] = clone_node
             for nei in original_node.neighbors:
-                clone_node.neighbors.append(nei.val)
-                dfs(nei)
+                clone_neighbor = dfs(nei)
+                clone_node.neighbors.append(clone_neighbor)
 
-            return dfs(node)
+            return clone_node
         
     return dfs(node)
 
