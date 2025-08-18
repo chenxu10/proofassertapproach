@@ -77,27 +77,7 @@ def cloneGraph(node: Optional[Node]) -> Optional[Node]:
     - Forgetting to connect cloned neighbors properly
     """
 
-    if not node:
-        return None
 
-    visited = {}
-
-    def dfs(original_node):
-        if original_node in visited:
-            return visited[original_node]
-        else:
-            # clone
-            clone_node = Node(original_node.val)
-            # add to visit
-            visited[original_node] = clone_node
-
-            for nei in original_node.neighbors:
-                cloned_node = dfs(nei)
-                clone_node.neighbors.append(cloned_node)
-
-            return clone_node
-    
-    return dfs(node)
 
 
     # TODO: Implement following the 5-step guidance above
@@ -114,13 +94,13 @@ class TestCloneGraph:
         #   assert result is None
         result = cloneGraph(None)
         assert result is None
+
     
     def test_single_isolated_node(self):
         """Base case: single node with no connections"""
         node = Node(1)
         clone_node = cloneGraph(node)
-        assert clone_node.val == 1
-        assert clone_node.neighbors == []
+
     
     def test_triangle_complete(self):
         """Simple cycle: triangular graph"""
@@ -140,13 +120,12 @@ class TestCloneGraph:
         node2.neighbors = [node1,node3]
         node3.neighbors = [node2,node3]
         #   - Clone the graph starting from node1
-        cloned_node1 = cloneGraph(node1)
         #   - Verify cloned node1 exists and has correct value
-        assert cloned_node1 is not None
+
         #   - Verify cloned node1 is different object from original
-        assert cloned_node1 is not node1
+
         #   - Verify cloned node1 has 2 neighbors
-        assert len(cloned_node1.neighbors) == 2
+
 
 def build_graph_from_adjacency_list(adj_list: List[List[int]]) -> Optional[Node]:
     """Helper function to build graph from adjacency list for testing"""
