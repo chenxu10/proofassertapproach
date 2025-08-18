@@ -120,7 +120,7 @@ class TestCloneGraph:
         node = Node(1)
         clone_node = cloneGraph(node)
         assert clone_node.val == 1
-        assert clone_node.neighbors == None
+        assert clone_node.neighbors == []
     
     def test_triangle_complete(self):
         """Simple cycle: triangular graph"""
