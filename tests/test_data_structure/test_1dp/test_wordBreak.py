@@ -2,50 +2,67 @@ import pytest
 
 def word_break(s, word_dict):
     """
+    🎯 Challenge: Implement word segmentation using dynamic programming
+    
     Given a string s and a dictionary of strings wordDict, return true if s 
     can be segmented into a space-separated sequence of dictionary words.
     
-    Args:
-        s: string to be segmented
-        word_dict: list of dictionary words
+    💡 Key insights to guide your thinking:
     
-    Returns:
-        bool: True if s can be segmented, False otherwise
-
-    ["apple","pen","ape"]
-     wordBreak("applepenapple")
-                         |
-                Try all prefixes
-                    /    |    \
-              "a" ✗   "ap" ✗   "app" ✗
-                         |
-                    "appl" ✗
-                         |
-                    "apple" ✓
-                         |
-                wordBreak("penapple")
-                         |
-                    Try prefixes
-                      /   |   \
-                 "p" ✗  "pe" ✗  "pen" ✓
-                              |
-                         wordBreak("apple")
-                              |
-                         "apple" ✓
-                              |
-                         wordBreak("") = True
+    🧠 DP State Design:
+    - What does dp[i] represent? (Think: "Can we segment s[0:i]?")
+    - What's your base case? (Hint: empty string is always segmentable)
+    
+    🔍 Transition Logic:
+    - For position i, what smaller subproblems do you check?
+    - If dp[j] is True and s[j:i] is in dictionary, what can you conclude?
+    
+    ⚡ Optimization Tips:
+    - Convert word_dict to set for O(1) lookups
+    - Use break once you find a valid segmentation for position i
+    
+    📊 Trace through "leetcode" with ["leet", "code"]:
+    - dp[0] = True (base case)
+    - dp[4] = ? (check if "leet" in dict and dp[0] is True)
+    - dp[8] = ? (check if "code" in dict and dp[4] is True)
+    
+    🎮 Your mission: Fill in the implementation below!
     """
+    # Step 1: Setup - what variables do you need?
+    # n = ?
+    # dp = ?
+    # word_set = ?
     n = len(s)
     dp = [False] * (n + 1)
-    dp[0] = True 
     word_set = set(word_dict)
-
-    for i in range(1, n + 1):
-        for j in range(i):
-            if dp[j] and s[j:i] in word_set:
-                dp[i] = True
-                break
-    return dp[n]
+    
+    # Step 2: Base case - what should dp[0] be?
+    if s == "":
+        dp[0] = True
+    
+    else:
+        for i in range(1, n + 1):
+            for j in range(i):
+                if dp[j] and s[j:i] in word_dict:
+                    return True
+                else:
+                    return False
+                
+    return dp[n -1]
+    # Step 3: Fill the DP table
+    # for i in range(...):
+    #     for j in range(...):
+    #         # Check: if we can reach j AND s[j:i] is a valid word
+    #         if ... and ... in ...:
+    #             # Then we can reach position i
+    #             dp[i] = ...
+    #             break  # Early termination - why is this helpful?
+    
+    # Step 4: Return the answer
+    # return dp[?]
+    
+    # TODO: Replace this placeholder with your implementation
+    pass
 
 class TestWordBreak:
     def test_basic_segmentation(self):
