@@ -160,54 +160,57 @@ class LRUCache:
         """
         Add node right after dummy head (most recently used position)
         
-        STORAGE STRENGTHENING EXERCISE:
-        Visualize the doubly linked list operations:
+        🎯 METACOGNITIVE CHALLENGE:
+        Before reading further, pause and think:
+        - In a doubly-linked list insertion, how many pointer updates are needed?
+        - What happens if you update pointers in the wrong order?
+        - Can you visualize this without looking at the diagram below?
         
-        BEFORE:
-        ┌──────┐    ┌─────────┐    ┌─────────┐    ┌──────┐
-        │ HEAD │◄──►│ old_first│◄──►│   ...   │◄──►│ TAIL │
-        │(dummy)    │          │    │         │    │(dummy)│
-        └──────┘    └─────────┘    └─────────┘    └──────┘
+        💡 DISCOVERY PATTERN (Only look after attempting above):
+        Think of this like carefully threading a needle between two pieces of fabric:
         
-        NEW NODE TO INSERT:
-        ┌─────────┐
-        │new_node │
-        │         │
-        └─────────┘
+        Current state: HEAD ◄──► old_first ◄──► ...
+        Goal state:    HEAD ◄──► new_node ◄──► old_first ◄──► ...
         
-        AFTER:
-        ┌──────┐    ┌─────────┐    ┌─────────┐    ┌─────────┐    ┌──────┐
-        │ HEAD │◄──►│new_node │◄──►│ old_first│◄──►│   ...   │◄──►│ TAIL │
-        │(dummy)    │  (MRU)  │    │          │    │         │    │(dummy)│
-        └──────┘    └─────────┘    └─────────┘    └─────────┘    └──────┘
+        Key insight: You're creating a "bridge" between HEAD and old_first.
+        The new_node becomes the bridge, with connections in both directions.
         
-        STEPS NEEDED:
-        1. new_node.prev = head
-        2. new_node.next = head.next  
-        3. head.next.prev = new_node
-        4. head.next = new_node
+        🔍 SELF-CHECK QUESTIONS:
+        - Which node needs to "forget" its current next pointer?
+        - Which node needs to "learn" a new prev pointer?
+        - Why might order of operations matter here?
         
-        What connections need to be updated?
-        TODO: Implement adding node after head
+        ⚡ IMPLEMENTATION NUDGE:
+        Consider this analogy: inserting yourself into a line of people holding hands.
+        What's the natural sequence? (Don't peek at hints below!)
+        
+        🎓 REFLECTION CHECKPOINT:
+        After implementing, ask yourself:
+        - Could I explain this to someone else using just the analogy?
+        - What would break if I skipped one of the pointer updates?
+        - How does this maintain the "most recently used" invariant?
         """
-        # TDD HINT: For test_single_put_get to pass, this method needs to:
-        # 1. Link the new node between head and head.next
-        # 2. Remember: order matters! Update in the right sequence to avoid breaking links
+        # 🚀 INDEPENDENT WORK ZONE - Try implementing before looking at hints!
+        # 
+        # If you're stuck, gradually reveal hints below:
+        current_first = self.head
+        node.prev = self.tail
+        node.next = current_first
+
+        current_first.prev = node
+        self.tail.next = node
         
-        # HINT: Store the original first node before modifying connections
-        # original_first = self.head.next
+        # GENTLE NUDGE 1: What do you need to remember before changing anything?
+        # current_first = ?
         
-        # HINT: Set the new node's backward pointer to head
-        # node.prev = self.head
+        # GENTLE NUDGE 2: The new node needs to know its neighbors
+        # node.prev = ?
+        # node.next = ?
         
-        # HINT: Set the new node's forward pointer to the original first
-        # node.next = original_first
+        # GENTLE NUDGE 3: The neighbors need to know about the new node
+        # Who should point to node as their new prev?
+        # Who should point to node as their new next?
         
-        # HINT: Update the original first node to point back to new node
-        # original_first.prev = node
-        
-        # HINT: Finally, update head to point forward to new node
-        # self.head.next = node
         pass
 
     def _remove_node(self, node: ListNode) -> None:
