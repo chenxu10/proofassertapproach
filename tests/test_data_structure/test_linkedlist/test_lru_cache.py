@@ -190,9 +190,24 @@ class LRUCache:
         What connections need to be updated?
         TODO: Implement adding node after head
         """
-        # TODO: Set new node's connections
-        # TODO: Update existing nodes' connections
-        # TODO: Maintain doubly-linked structure
+        # TDD HINT: For test_single_put_get to pass, this method needs to:
+        # 1. Link the new node between head and head.next
+        # 2. Remember: order matters! Update in the right sequence to avoid breaking links
+        
+        # HINT: Store the original first node before modifying connections
+        # original_first = self.head.next
+        
+        # HINT: Set the new node's backward pointer to head
+        # node.prev = self.head
+        
+        # HINT: Set the new node's forward pointer to the original first
+        # node.next = original_first
+        
+        # HINT: Update the original first node to point back to new node
+        # original_first.prev = node
+        
+        # HINT: Finally, update head to point forward to new node
+        # self.head.next = node
         pass
 
     def _remove_node(self, node: ListNode) -> None:
@@ -225,8 +240,19 @@ class LRUCache:
         
         TODO: Implement node removal
         """
-        # TODO: Connect previous node to next node
-        # TODO: Connect next node to previous node
+        # TDD HINT: For test_single_put_get to pass, this method needs to:
+        # 1. Bypass the node by connecting its neighbors directly
+        # 2. This is used when evicting LRU items or moving nodes
+        
+        # HINT: Connect the previous node directly to the next node
+        # node.prev.next = node.next
+        
+        # HINT: Connect the next node directly to the previous node
+        # node.next.prev = node.prev
+        
+        # HINT: Optional cleanup (good practice but not required for basic functionality)
+        # node.prev = None
+        # node.next = None
         pass
 
     def _move_to_head(self, node: ListNode) -> None:
@@ -261,8 +287,17 @@ class LRUCache:
         
         TODO: Use existing helper methods
         """
-        # TODO: Remove node from current position
-        # TODO: Add node to head position
+        # TDD HINT: For test_single_put_get to pass, this method needs to:
+        # 1. Remove the node from its current position (already implemented above)
+        # 2. Add the node to the head position (already implemented above)
+        
+        # HINT: Use the helper method to remove node from current position
+        # self._remove_node(node)
+        
+        # HINT: Use the helper method to add node to head position
+        # self._add_to_head(node)
+        
+        # NOTE: This method is used when accessing existing keys in get() and put()
         pass
 
     def _remove_tail(self) -> ListNode:
@@ -273,9 +308,21 @@ class LRUCache:
         Which node should be removed in LRU policy?
         TODO: Implement LRU removal
         """
-        # TODO: Identify the LRU node
-        # TODO: Remove it from list
-        # TODO: Return the removed node
+        # TDD HINT: For test_single_put_get to pass, this method needs to:
+        # 1. Identify the LRU node (node just before dummy tail)
+        # 2. Remove it from the linked list
+        # 3. Return the removed node so caller can clean up hash table
+        
+        # HINT: Get the LRU node (the one right before dummy tail)
+        # lru_node = self.tail.prev
+        
+        # HINT: Remove the LRU node from the linked list
+        # self._remove_node(lru_node)
+        
+        # HINT: Return the removed node for hash table cleanup
+        # return lru_node
+        
+        # NOTE: This method is used when cache exceeds capacity
         pass
 
     def get(self, key: int) -> int:
@@ -289,9 +336,27 @@ class LRUCache:
         
         TODO: Implement get operation
         """
-        # TODO: Check if key exists in cache
-        # TODO: If exists: move to head and return value  
-        # TODO: If not exists: return -1
+        # TDD HINT: For test_single_put_get to pass, this method needs to:
+        # 1. Check if key exists in the hash table
+        # 2. If exists: move node to head (most recently used) and return its value
+        # 3. If not exists: return -1
+        
+        # HINT: Check if key exists in the cache dictionary
+        # if key in self.cache:
+        
+        # HINT: Get the node from cache
+        #     node = self.cache[key]
+        
+        # HINT: Move the accessed node to head (mark as most recently used)
+        #     self._move_to_head(node)
+        
+        # HINT: Return the node's value
+        #     return node.val
+        
+        # HINT: If key doesn't exist, return -1
+        # return -1
+        
+        # NOTE: This method makes the accessed item the most recently used
         pass
 
     def put(self, key: int, value: int) -> None:
@@ -305,13 +370,25 @@ class LRUCache:
         
         TODO: Implement put operation
         """
-        # TODO: Check if key already exists
-        # TODO: If exists: update value and move to head
-        # TODO: If new key:
-        #   - Create new node
-        #   - Add to head and cache
-        #   - If over capacity: remove LRU item
-        pass
+        # TDD HINT: For test_single_put_get to pass, this method needs to:
+        # 1. Handle updating existing keys (update value + move to head)
+        # 2. Handle adding new keys (create node + add to cache + manage capacity)
+        
+        # HINT: Check if key already exists in cache
+        # if key in self.cache:
+        if key in self.cache:
+            node = self.cache[key]
+            node.value = value
+            self._move_to_head(node)
+
+        else:
+            new_node = ListNode(key, value)
+            self.cache[key] = new_node
+            self._add_to_head(new_node)
+
+        if len(self.cache) > self.capacity:
+            lru_node = self._remove_tail()
+            del self.cache[lru_node.key]
 
 
 class TestLRUCache:
@@ -341,7 +418,7 @@ class TestLRUCache:
     def test_empty_cache_get(self):
         """Test getting from empty cache"""
         lru_cache = LRUCache(1)
-        lru_cache.put(2)
+        lru_cache.put(2,100)
         assert lru_cache.get(1) == -1
         assert lru_cache.get(0) == -1
 
