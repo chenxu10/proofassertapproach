@@ -193,12 +193,13 @@ class LRUCache:
         # 🚀 INDEPENDENT WORK ZONE - Try implementing before looking at hints!
         # 
         # If you're stuck, gradually reveal hints below:
-        current_first = self.head
-        node.prev = self.tail
+        current_first = self.head.next # get first after dummy node
+        node.prev = self.head
         node.next = current_first
 
+        # update neighbors(current first and head)
         current_first.prev = node
-        self.tail.next = node
+        self.head.next = node
         
         # GENTLE NUDGE 1: What do you need to remember before changing anything?
         # current_first = ?
