@@ -325,7 +325,6 @@ class LRUCache:
         # HINT: Return the removed node for hash table cleanup
         # return lru_node
         
-        # NOTE: This method is used when cache exceeds capacity
         lru_node = self.tail.prev
         self._remove_node(lru_node)
         return lru_node
