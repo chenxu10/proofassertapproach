@@ -244,6 +244,8 @@ class LRUCache:
         
         TODO: Implement node removal
         """
+        node.prev.next = node.next
+        node.next.prve = node.prev
         # TDD HINT: For test_single_put_get to pass, this method needs to:
         # 1. Bypass the node by connecting its neighbors directly
         # 2. This is used when evicting LRU items or moving nodes
@@ -253,11 +255,7 @@ class LRUCache:
         
         # HINT: Connect the next node directly to the previous node
         # node.next.prev = node.prev
-        
-        # HINT: Optional cleanup (good practice but not required for basic functionality)
-        # node.prev = None
-        # node.next = None
-        pass
+
 
     def _move_to_head(self, node: ListNode) -> None:
         """
