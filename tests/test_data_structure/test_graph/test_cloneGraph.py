@@ -85,15 +85,15 @@ def cloneGraph(node: Optional[Node]) -> Optional[Node]:
             return visited[original_node]
         else:
             clone_node = Node(original_node.val)
+            visited[original_node] = clone_node
             for nei in original_node.neighbors:
-                clone_node.neighbors.append(node(nei))
-                visited[original_node] = clone_node
+                clone_node.neighbors.append(dfs(nei))
             return clone_node
 
+    visited = {}
     if node is None:
         return None
     else:
-        visited = {}
         return dfs(node)
 
 class TestCloneGraph:
