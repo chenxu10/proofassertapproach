@@ -317,6 +317,7 @@ class LRUCache:
         
         # HINT: Get the LRU node (the one right before dummy tail)
         # lru_node = self.tail.prev
+
         
         # HINT: Remove the LRU node from the linked list
         # self._remove_node(lru_node)
@@ -325,7 +326,9 @@ class LRUCache:
         # return lru_node
         
         # NOTE: This method is used when cache exceeds capacity
-        pass
+        lru_node = self.tail.prev
+        self._remove_node(lru_node)
+        return lru_node
 
     def get(self, key: int) -> int:
         """
