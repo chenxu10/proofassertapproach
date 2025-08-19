@@ -107,10 +107,10 @@ def maxPathSum(node):
         current_max = node.val + left_max + right_max
 
         #global_max_sum = max(global_max_sum, current_max)
-        if node.val < 0:
-            global_max_sum = global_max_sum
-        else:
+        if current_max > global_max_sum:
             global_max_sum = current_max
+        else:
+            global_max_sum = global_max_sum
         # Path goes through some node N (left_child → N → right_child)
         #Path is a downward path from some node
         return node.val + max(left_max, right_max)
