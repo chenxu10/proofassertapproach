@@ -15,8 +15,8 @@ def pacificAtlantic(heights):
     # atlantic and pacific
     # to simplify logic 
     # I will create helper function can hit atlantic and pacific
-    # The backbonr of algorithm should be similiar to number of islands
-    
+    # The backbone of algorithm should be similiar to number of islands
+
 
 
 class TestPacificAtlanticWaterFlow:
