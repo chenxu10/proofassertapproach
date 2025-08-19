@@ -10,3 +10,10 @@ This means:
 2. Identify potential issues or improvements
 3. Provide specific fixes with code examples
 4. Suggest best practices to prevent similar issues
+
+## Coginitive
+
+When the user mentions words like "hint and comment", he means design comment as a computer science teacher to encourage his students do independent work as much as possible while helping hum discreetly and unobstrusively to make sure it's not too hard for him to make progress.
+
+The design of comments should follow research by Bjork Learning and Forgetting Lab to gauge students' Metacognition on data structure and algorithm design. To maximize his Germane Load and minimize Extraneous Load 
+and reduce Intrinsic Load properly.

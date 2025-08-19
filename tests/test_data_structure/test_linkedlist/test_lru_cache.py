@@ -385,10 +385,10 @@ class LRUCache:
             if len(self.cache) > self.capacity:
                 lru_node = self._remove_tail()
                 del self.cache[lru_node.key]
-            else:
-                new_node = ListNode(key, value)
-                self.cache[key] = new_node
-                self._add_to_head(new_node)
+            
+            new_node = ListNode(key, value)
+            self.cache[key] = new_node
+            self._add_to_head(new_node)
 
 
 
