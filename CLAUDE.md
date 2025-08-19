@@ -3,7 +3,7 @@
 ## Custom Commands
 
 When the user says "give feedback", interpret this as:
-"Give critical suggestions, point out wrong if there's any, give fix and suggestions on how to prevent it next time"
+"Give critical suggestions, point out wrong if there's any, give fix and suggestions on how to prevent it next time. Encourage me if everything is correct."
 
 This means:
 1. Analyze the code for correctness and logic errors

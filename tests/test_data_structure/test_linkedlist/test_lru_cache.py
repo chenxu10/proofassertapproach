@@ -348,12 +348,13 @@ class TestLRUCache:
     # CATEGORY 2: BASIC OPERATIONS
     def test_single_put_get(self):
         """Test basic put and get operations"""
-        # STORAGE STRENGTHENING: Trace through the linked list changes
-        # After put(1, 100), what's the list structure?
-        # After get(1), does anything change?
-        # TODO: Put one item and get it back
-        # TODO: Add assertions for value and cache state
-        pass
+
+        lru_cache = LRUCache(2)
+        lru_cache.put(1,100)
+        
+        assert len(lru_cache.cache) == 1
+        result = lru_cache.get(1)
+        assert result == 100
 
     def test_multiple_put_get(self):
         """Test multiple puts and gets without eviction"""
