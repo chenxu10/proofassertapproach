@@ -57,10 +57,17 @@ class TestWordBreak:
         assert word_break(s, word_dict) == True
     
     def test_reuse_dictionary_words(self):
-        """Test reusing words from dictionary"""
-        s = "applepenapple"
-        word_dict = ["apple", "pen"]
-        assert word_break(s, word_dict) == True
+        """
+        🤔 Think: Can dictionary words be reused multiple times?
+        
+        💡 Hint: Consider a string like "applepenapple" with dict ["apple", "pen"]
+        🧠 Mental trace: What happens at each dp[i] when we find "apple" twice?
+        🎯 Key insight: Why does dynamic programming naturally handle word reuse?
+        
+        ✏️ Your task: Design a test case and mentally verify the result
+        """
+        # TODO: Write your test case here - think about word reuse patterns
+        assert word_break("applepenapple",["apple","pen"]) == True
     
     def test_impossible_segmentation(self):
         """Test case where segmentation is impossible"""
@@ -69,10 +76,19 @@ class TestWordBreak:
         assert word_break(s, word_dict) == False
     
     def test_single_word_match(self):
-        """Test single word that exists in dictionary"""
-        s = "python"
-        word_dict = ["python", "java", "code"]
-        assert word_break(s, word_dict) == True
+        """
+        🎯 Simple case: What if the entire string is one dictionary word?
+        
+        💡 Hint: Consider "python" with dictionary ["python", "java", "code"]
+        🤔 Think: How many iterations does the DP algorithm need?
+        📊 Trace: What values will dp[0] through dp[6] contain?
+        
+        ⚡ Efficiency note: This is the best-case scenario - why?
+        
+        ✏️ Your task: Create this test and predict the dp array contents
+        """
+        # TODO: Implement this straightforward case and verify your prediction
+        assert word_break("python",["python","java"]) == True
     
     def test_empty_string(self):
         """Test empty string"""
