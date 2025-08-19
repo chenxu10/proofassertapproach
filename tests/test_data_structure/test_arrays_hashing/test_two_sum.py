@@ -1,17 +1,3 @@
-"""
-Test cases for Two Sum problem based on constructive proof approach.
-
-The Two Sum problem: Given an array of integers and a target sum, 
-find two numbers in the array that add up to the target.
-
-Test cases are designed to verify proof requirements:
-1. Correctness: Solution finds valid pair when it exists
-2. Completeness: Solution handles all possible scenarios
-3. Termination: Algorithm terminates in all cases
-4. Uniqueness: Handles cases with multiple valid pairs
-5. Edge cases: Empty arrays, no solution, duplicate values
-"""
-
 import unittest
 
 
@@ -26,6 +12,9 @@ def two_sum(nums, target):
     Returns:
         List of two indices [i, j] where nums[i] + nums[j] == target,
         or None if no solution exists
+
+
+    Memo to cache complement
     """
     memo = {}
 
