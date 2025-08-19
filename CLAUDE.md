@@ -17,3 +17,5 @@ When the user says words like "hint and comment", he means design comment as a c
 
 The design of comments should follow research by Bjork Learning and Forgetting Lab to gauge students' Metacognition on data structure and algorithm design. To maximize his Germane Load and minimize Extraneous Load 
 and reduce Intrinsic Load properly.
+
+When create unit tests. Do not generate more than five tests.
