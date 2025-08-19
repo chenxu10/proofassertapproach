@@ -147,7 +147,7 @@ class LRUCache:
         TODO: Implement initialization
         """
         if capacity <= 0:
-            return ValueError("Capacity must larger than 0")
+            raise ValueError("Capacity must larger than 0")
         self.capacity = capacity
         self.cache = {}
         self.head = ListNode()
@@ -378,17 +378,18 @@ class LRUCache:
         # if key in self.cache:
         if key in self.cache:
             node = self.cache[key]
-            node.value = value
+            node.val = value
             self._move_to_head(node)
 
         else:
-            new_node = ListNode(key, value)
-            self.cache[key] = new_node
-            self._add_to_head(new_node)
+            if len(self.cache) > self.capacity:
+                lru_node = self._remove_tail()
+                del self.cache[lru_node.key]
+            else:
+                new_node = ListNode(key, value)
+                self.cache[key] = new_node
+                self._add_to_head(new_node)
 
-        if len(self.cache) > self.capacity:
-            lru_node = self._remove_tail()
-            del self.cache[lru_node.key]
 
 
 class TestLRUCache:
