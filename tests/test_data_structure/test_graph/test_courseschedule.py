@@ -25,6 +25,7 @@ def canFinish(numCourses, prerequisites):
     # Hint: Three states help track DFS progress:
     # 0 = unvisited, 1 = currently processing (in recursion stack), -1 = completely processed
     # TODO: Create visited array of size numCourses, initialized to 0
+    visited = [0] * numCourses
     
     # Step 3: DFS helper function for cycle detection
     # Hint: What should happen if you encounter a node with state 1 during DFS?
@@ -36,16 +37,25 @@ def canFinish(numCourses, prerequisites):
         # - Mark as processing (visited[course] = 1)
         # - Recursively check all neighbors
         # - Mark as completely processed (visited[course] = -1)
-        pass
+        if visited[course] == 1:
+            return True
+        if visited[course] == -1:
+            return False
+        visited[course] == 1
+        for dependent in graph[course]:
+            has_cycle[dependent]
+        visited[course] = -1
     
     # Step 4: Check all courses for cycles
     # Hint: Why do we need to check ALL courses, not just course 0?
     # Think about disconnected components in the graph!
     # TODO: For each unvisited course, run cycle detection
-    
+    for course in range(numCourses):
+        if visited[course] == 0:
+            if has_cycle(course):
+                return False
     # If no cycles found in any component, all courses can be finished!
     return True
-
 
 class TestCourseSchedule:
     
