@@ -1,5 +1,5 @@
 import pytest
-
+from collections import defaultdict
 
 def canFinish(numCourses, prerequisites):
     """
@@ -13,9 +13,38 @@ def canFinish(numCourses, prerequisites):
     Returns:
         bool: True if all courses can be finished, False otherwise
     """
+    
+    # Step 1: Build adjacency list representation
+    # Hint: What data structure efficiently stores "course -> list of dependent courses"?
+    # TODO: Create a graph where graph[course] = [courses that depend on this course]
 
-    # High level: use dfs to detect for circle, data structure should
-    # use visited -1,0,1 three stature
+    graph = [[] for _ in range(numCourses)]
+    for course, pre in prerequisites:
+        graph[pre].append(course)
+    # Step 2: Initialize visited states for cycle detection
+    # Hint: Three states help track DFS progress:
+    # 0 = unvisited, 1 = currently processing (in recursion stack), -1 = completely processed
+    # TODO: Create visited array of size numCourses, initialized to 0
+    
+    # Step 3: DFS helper function for cycle detection
+    # Hint: What should happen if you encounter a node with state 1 during DFS?
+    # This indicates a back edge = cycle!
+    def has_cycle(course):
+        # TODO: Implement DFS logic
+        # - If visited[course] == 1: return True (cycle detected!)
+        # - If visited[course] == -1: return False (already processed, safe)
+        # - Mark as processing (visited[course] = 1)
+        # - Recursively check all neighbors
+        # - Mark as completely processed (visited[course] = -1)
+        pass
+    
+    # Step 4: Check all courses for cycles
+    # Hint: Why do we need to check ALL courses, not just course 0?
+    # Think about disconnected components in the graph!
+    # TODO: For each unvisited course, run cycle detection
+    
+    # If no cycles found in any component, all courses can be finished!
+    return True
 
 
 class TestCourseSchedule:
