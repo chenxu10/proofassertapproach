@@ -37,18 +37,16 @@ def word_break(s, word_dict):
     word_set = set(word_dict)
     
     # Step 2: Base case - what should dp[0] be?
-    if s == "":
-        dp[0] = True
+    dp[0] = True  # Empty string is always segmentable
     
-    else:
-        for i in range(1, n + 1):
-            for j in range(i):
-                if dp[j] and s[j:i] in word_dict:
-                    return True
-                else:
-                    return False
+    # Step 3: Fill the DP table
+    for i in range(1, n + 1):
+        for j in range(i):
+            if dp[j] and s[j:i] in word_set:
+                dp[i] = True
+                break  # Early termination for this position
                 
-    return dp[n -1]
+    return dp[n]
     # Step 3: Fill the DP table
     # for i in range(...):
     #     for j in range(...):
