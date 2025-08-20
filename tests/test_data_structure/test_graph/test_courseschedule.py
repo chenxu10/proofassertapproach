@@ -2,21 +2,33 @@ import pytest
 
 def canFinish(num_course, courses):
     visited = [0] * num_course
+    
+    course_graph = [[] for _ in range(num_course)]
+    for cor, pre in courses:
+        course_graph[pre].append(cor)
 
     def has_cycle(course):
+        """
+        Returns boolean to detect there's cycle or not
+        """
         if visited[course] == -1:
             return False
         if visited[course] == 1:
             return True
-        for nei in course_graph:
-            has_cycle(nei)
-        visited[nei] = 1
+        
+        visited[course] = -1
+        for nei in course_graph[course]:
+            if has_cycle(nei):
+                return True
+        visited[course] = 1
+        return False
 
     for i in range(num_course):
         if visited[i] == 0:
-            return has_cycle(courses[i])
+            if has_cycle(courses[i]):
+                return False
         
-    return False
+    return True
 
 class TestCourseSchedule:
     
