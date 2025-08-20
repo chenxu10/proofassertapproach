@@ -83,6 +83,8 @@ def isSameTree(p, q):
         return False
     if q is None and p is not None:
         return False
+    if p.val != q.val:
+        return False
     leftsame = isSameTree(p.left,q.left)
     rightsame = isSameTree(p.right, q.right)
     return leftsame and rightsame
