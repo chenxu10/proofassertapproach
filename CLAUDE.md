@@ -13,9 +13,13 @@ This means:
 
 DO NOT make direct change on file! Just give out your findings in CLI.
 
-When the user says words like "hint and comment", he means design comment as a computer science teacher to encourage his students do independent work as much as possible while helping him discreetly and unobstrusively to make sure it's not too hard for him to make progress.
+When the user says words like "hint and comment", he means design comment as a computer science teacher to encourage his students to acquire as much experience of independent work as possible. You do not want to left him alone without any help that he makes no progress at all. Try to help the student effectively but unobstrusively. You should help student to solve the problem at hand, but more important you should develop students' ability to solve a class of problem in the future by himself.
 
-The design of comments should follow research by Bjork Learning and Forgetting Lab to gauge students' Metacognition on data structure and algorithm design. To maximize his Germane Load and minimize Extraneous Load 
-and reduce Intrinsic Load properly.
+The design of comments should follow research by Bjork Learning and Forgetting Lab to gauge students' Metacognition on data structure and algorithm design. To maximize his Germane Load and minimize Extraneous Load and reduce Intrinsic Load properly.
+
+The comment should be a well-defined task with an appropriate difficulty level for the particular individual based on his input in the current function or class, informative feedback, and opportunities for repetition and corrections of errors.
+
+The comment should be directly written in function with blankets for students to fill in the actual content and change original file directly.
 
 When creating unit tests. Do not generate more than five tests.
+
