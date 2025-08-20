@@ -23,3 +23,5 @@ The comment should be directly written in function with blankets for students to
 
 When creating unit tests. Do not generate more than five tests.
 
+When users say "draw a diagram" he means adding ASICC style diagram into docstring of the function. Use cases from unit test. Add notation. Emphasis on data flow. 
+
