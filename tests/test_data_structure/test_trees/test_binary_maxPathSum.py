@@ -118,7 +118,7 @@ def maxPathSum(node):
     """
     # TODO 1: Initialize global maximum. What should be the initial value?
     # Hint: Consider what happens with all-negative trees
-    global_max_sum = float('-inf')# Fill in: What's a safe initial value?
+    global_max_sum = float('-inf')  # Safe initial value for all cases including all-negative trees
 
     def post_order_traversal(node):
         """
@@ -132,12 +132,16 @@ def maxPathSum(node):
         # TODO 2: Base case - what to return for empty node?
         # Hint: What value doesn't affect parent's sum calculation?
         if not node:
-            return 0  # Fill in: Base case return value
+            return 0  # Return 0 so it doesn't contribute to parent's calculation
             
         # TODO 3: Get maximum contributions from children
         # Hint: Postorder means process children first. Why?
-        left_max = max(0,post_order_traversal(node.left))  # Fill in: How to get left child's contribution?
-        right_max = max(0,post_order_traversal(node.right))  # Fill in: How to get right child's contribution?
+        left_contribution = post_order_traversal(node.left)  # Get raw contribution from left
+        right_contribution = post_order_traversal(node.right)  # Get raw contribution from right
+        
+        # Only take positive contributions (ignore negative paths)
+        left_max = max(0, left_contribution)
+        right_max = max(0, right_contribution)
         
         # TODO 4: Calculate path THROUGH current node (left → node → right)
         # This is a candidate for global maximum but can't extend to parent
@@ -146,13 +150,12 @@ def maxPathSum(node):
         
         # TODO 5: Update global maximum
         # Compare current path through this node with global best
-
         global_max_sum = max(current_max, global_max_sum)
             
         # TODO 6: Return path FROM this node (extending upward)
         # Key insight: Can only choose ONE direction (left OR right) + current node
         # Why? Because parent can only connect through current node in one direction
-        return node.val + max(left_max, right_max)  # Fill in: What's the maximum path FROM this node upward?
+        return node.val + max(left_max, right_max)  # Return max path from this node upward
         
         # Reflection Questions:
         # - Why can't we return current_max to parent?
@@ -220,7 +223,8 @@ class TestBinaryMaxPathSum(unittest.TestCase):
         root.right.right = TreeNode(7)
         
         # Expected: 15 + 20 + 7 = 42 (avoiding the negative root -10)
-        pass
+        actual = maxPathSum(root)
+        self.assertEqual(actual, 42)
     
     def test_single_node_tree(self):
         """
@@ -237,7 +241,8 @@ class TestBinaryMaxPathSum(unittest.TestCase):
         
         # Expected: 5 (single node path)
         # This verifies correct handling of base case
-        pass
+        actual = maxPathSum(root)
+        self.assertEqual(actual, 5)
     
     def test_linear_tree_structure(self):
         """
@@ -261,7 +266,8 @@ class TestBinaryMaxPathSum(unittest.TestCase):
         root.right.right = TreeNode(3)
         
         # Expected: 1 + 2 + 3 = 6
-        pass
+        actual = maxPathSum(root)
+        self.assertEqual(actual, 6)
     
     def test_path_not_through_root(self):
         """
@@ -287,7 +293,8 @@ class TestBinaryMaxPathSum(unittest.TestCase):
         root.left.right = TreeNode(5)
         
         # Expected: 4 + 2 + 5 = 11 (left subtree path)
-        pass
+        actual = maxPathSum(root)
+        self.assertEqual(actual, 11)
     
     def test_all_negative_values(self):
         """
@@ -309,7 +316,8 @@ class TestBinaryMaxPathSum(unittest.TestCase):
         root.right = TreeNode(-5)
         
         # Expected: -3 (best single node when all are negative)
-        pass
+        actual = maxPathSum(root)
+        self.assertEqual(actual, -3)
     
     def test_mixed_large_tree(self):
         """
@@ -324,7 +332,7 @@ class TestBinaryMaxPathSum(unittest.TestCase):
               / \      \
              7   2      1
              
-        Expected: Maximum path through optimal route
+        Expected: 48 (path: 7 -> 11 -> 4 -> 5 -> 8 -> 13)
         
         This tests algorithmic correctness on larger trees with
         mixed positive and negative values.
@@ -340,8 +348,9 @@ class TestBinaryMaxPathSum(unittest.TestCase):
         root.right.right = TreeNode(4)
         root.right.right.right = TreeNode(1)
         
-        # Expected: Find maximum path in this complex structure
-        pass
+        # Expected: 48 (path: 7 -> 11 -> 4 -> 5 -> 8 -> 13)
+        actual = maxPathSum(root)
+        self.assertEqual(actual, 48)
 
 
 if __name__ == '__main__':
