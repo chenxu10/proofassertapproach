@@ -90,30 +90,74 @@ import unittest
 
 def maxPathSum(node):
     """
-    Deductive reasoning of post order traversal
+    Binary Tree Maximum Path Sum - Find the maximum sum of any path in a binary tree.
+    
+    ASCII Diagram of Key Concepts:
+    
+    Example Tree:        1
+                       /   \
+                      2     3
+                     / \   
+                    4   5   
+    
+    Two types of paths to consider at each node:
+    1. Path THROUGH current node (connects left & right subtrees):
+       Path: 4 → 2 → 5  (sum = 11, goes THROUGH node 2)
+       
+    2. Path FROM current node (extends upward to parent):
+       Path: 4 → 2 → 1  (node 2 contributes: 2 + max(left=4, right=5) = 7)
+    
+    Key Insight: At each node, we need to:
+    - Update global maximum with path THROUGH this node
+    - Return path FROM this node to parent
+    
+    Think About:
+    1. Why do we use postorder traversal? (Hint: what do we need before processing current node?)
+    2. What's the difference between "path through node" vs "path from node"?
+    3. Why return only one direction (left OR right) to parent?
     """
-    global_max_sum = float('-inf')
+    # TODO 1: Initialize global maximum. What should be the initial value?
+    # Hint: Consider what happens with all-negative trees
+    global_max_sum = float('-inf')# Fill in: What's a safe initial value?
 
     def post_order_traversal(node):
         """
-        maximum gain include node in the path
+        Returns: Maximum path sum FROM this node going upward (to parent)
+        Side effect: Updates global_max_sum with path THROUGH this node
+        
+        Think: Why do we need both return value AND side effect?
         """
         nonlocal global_max_sum
+        
+        # TODO 2: Base case - what to return for empty node?
+        # Hint: What value doesn't affect parent's sum calculation?
         if not node:
-            return 0
-        # Contain node or not contain node
-        left_max = post_order_traversal(node.left)
-        right_max = post_order_traversal(node.right)
+            return 0  # Fill in: Base case return value
+            
+        # TODO 3: Get maximum contributions from children
+        # Hint: Postorder means process children first. Why?
+        left_max = max(0,post_order_traversal(node.left))  # Fill in: How to get left child's contribution?
+        right_max = max(0,post_order_traversal(node.right))  # Fill in: How to get right child's contribution?
+        
+        # TODO 4: Calculate path THROUGH current node (left → node → right)
+        # This is a candidate for global maximum but can't extend to parent
+        # Why? Because it uses BOTH left and right paths
         current_max = node.val + left_max + right_max
+        
+        # TODO 5: Update global maximum
+        # Compare current path through this node with global best
 
-        #global_max_sum = max(global_max_sum, current_max)
-        if current_max > global_max_sum:
-            global_max_sum = current_max
-        else:
-            global_max_sum = global_max_sum
-        # Path goes through some node N (left_child → N → right_child)
-        #Path is a downward path from some node
-        return node.val + max(left_max, right_max)
+        global_max_sum = max(current_max, global_max_sum)
+            
+        # TODO 6: Return path FROM this node (extending upward)
+        # Key insight: Can only choose ONE direction (left OR right) + current node
+        # Why? Because parent can only connect through current node in one direction
+        return node.val + max(left_max, right_max)  # Fill in: What's the maximum path FROM this node upward?
+        
+        # Reflection Questions:
+        # - Why can't we return current_max to parent?
+        # - What would happen if we always chose both left_max + right_max?
+        # - How does this handle negative contributions?
 
     post_order_traversal(node)
     return global_max_sum
