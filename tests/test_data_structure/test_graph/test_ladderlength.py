@@ -50,23 +50,25 @@ def ladderLength(beginWord, endWord, wordList):
     # Start with the base case checks
     # Then set up your BFS data structures
     # Finally implement the main BFS loop
-    
-    # queue = deque([beginWord])
-    # visited = set()
 
-    # while queue:
-    #     word = queue.pop()
-    #     if word in visited:
 
-    #         c = "abc"
-    #         new_word = 
-    #         if new_word in wordList:
-    #             queue.append(new_word)
-    #         visited.append(new_word)
-    #         steps += 1
+    queue = deque([(beginWord, 1)])
+    visited = set([beginWord])
+
+    while queue:
+        word, step = queue.popleft()
+        if word == endWord:
+            return step
         
-    # return steps
-    pass
+        for i in range(len(word)):
+            for c in "abcdefghijklmnopqrstuvwxyz":
+                new_word = word[:i] + c + word[i+1:]
+                if new_word not in visited and new_word in wordList:
+                    queue.append((new_word, step + 1))
+                    visited.add(new_word)
+    
+    return 0
+
 class TestLadderLength:
     def test_example_1(self):
         beginWord = "hit"
