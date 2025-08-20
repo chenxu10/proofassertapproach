@@ -1,61 +1,22 @@
 import pytest
-from collections import defaultdict
 
-def canFinish(numCourses, prerequisites):
-    """
-    Determine if it's possible to finish all courses given prerequisites.
-    
-    Args:
-        numCourses (int): Total number of courses labeled from 0 to numCourses-1
-        prerequisites (List[List[int]]): List of prerequisite pairs [a, b] where 
-                                       course b must be taken before course a
-    
-    Returns:
-        bool: True if all courses can be finished, False otherwise
-    """
-    
-    # Step 1: Build adjacency list representation
-    # Hint: What data structure efficiently stores "course -> list of dependent courses"?
-    # TODO: Create a graph where graph[course] = [courses that depend on this course]
+def canFinish(num_course, courses):
+    visited = [0] * num_course
 
-    graph = [[] for _ in range(numCourses)]
-    for course, pre in prerequisites:
-        graph[pre].append(course)
-    # Step 2: Initialize visited states for cycle detection
-    # Hint: Three states help track DFS progress:
-    # 0 = unvisited, 1 = currently processing (in recursion stack), -1 = completely processed
-    # TODO: Create visited array of size numCourses, initialized to 0
-    visited = [0] * numCourses
-    
-    # Step 3: DFS helper function for cycle detection
-    # Hint: What should happen if you encounter a node with state 1 during DFS?
-    # This indicates a back edge = cycle!
     def has_cycle(course):
-        # TODO: Implement DFS logic
-        # - If visited[course] == 1: return True (cycle detected!)
-        # - If visited[course] == -1: return False (already processed, safe)
-        # - Mark as processing (visited[course] = 1)
-        # - Recursively check all neighbors
-        # - Mark as completely processed (visited[course] = -1)
-        if visited[course] == 1:
-            return True
         if visited[course] == -1:
             return False
-        visited[course] == 1
-        for dependent in graph[course]:
-            has_cycle[dependent]
-        visited[course] = -1
-    
-    # Step 4: Check all courses for cycles
-    # Hint: Why do we need to check ALL courses, not just course 0?
-    # Think about disconnected components in the graph!
-    # TODO: For each unvisited course, run cycle detection
-    for course in range(numCourses):
-        if visited[course] == 0:
-            if has_cycle(course):
-                return False
-    # If no cycles found in any component, all courses can be finished!
-    return True
+        if visited[course] == 1:
+            return True
+        for nei in course_graph:
+            has_cycle(nei)
+        visited[nei] = 1
+
+    for i in range(num_course):
+        if visited[i] == 0:
+            return has_cycle(courses[i])
+        
+    return False
 
 class TestCourseSchedule:
     
