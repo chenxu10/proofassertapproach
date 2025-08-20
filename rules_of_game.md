@@ -1,17 +1,17 @@
 # Rules of Game
-1. Never jump to work session without an warmup.
-2. When hitting bottlenecks back track to do some related easy problems you already mastered.
-3. See, do, teach, apply and show off.
-4. Our brain treats skin in the game and non-skin in the game differently.
-5. Increase your Germane Load, load to connect with your previously solved problem.
-6. Be humble, know your constraints(working memory limits(avoid long parameters, nested structure, ambigious name, no helper function, jump to low level too soon, use chunk, use familiar pattern)).
-7. Deducive and guess from the first principles. ### The Master Theorem
-8. Intensity(Rather work 10 minutes with 100% than 30 minutes with 70%)
-9. Rest and break to make you recover
-10. Stop loss, when stuck more than five minutes ask for help.
-11. Fight first, do not give up under two minutes.
-12. Use Pareto 80/20 at every level
-
+- Never jump to work session without an warmup.
+- Never ever skip the base case f(n)
+- When hitting bottlenecks. DO NOT BRUTE FORCE. Back track to do some related easy problems you already mastered.
+- DO NOT grill. Intensity(Rather work 10 minutes with 100% than 30 minutes with 70%)
+- Use Pareto 80/20 at hierarchical every level(世界是分形自相似的)
+- See, do, teach, apply and show off.
+- Our brain treats skin in the game and non-skin in the game differently.
+- Increase your Germane Load, load to connect with your previously solved problem.
+- Be humble, know your constraints(working memory limits(avoid long parameters, nested structure, ambigious name, no helper function, jump to low level too soon, use chunk, use familiar pattern)).
+- Deducive and guess from the first principles. ### The Master Theorem
+- Rest and break to make you recover
+- Stop loss, when stuck more than five minutes ask for help.
+- Fight first, do not give up under two minutes.
 
 # First principle
 The Master Theorem is a fundamental law for analyzing the time complexity of divide-and-conquer algorithms. It provides a mathematical framework that algorithm designers **must obey** when creating recursive solutions.
