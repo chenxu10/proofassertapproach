@@ -7,74 +7,8 @@ class Node:
         self.neighbors = neighbors if neighbors is not None else []
 
 def cloneGraph(node: Optional[Node]) -> Optional[Node]:
-    r"""
-    Clone Graph Algorithm - Deep copy of undirected graph
-    
-    COMPLEXITY ANALYSIS (Master Theorem Application):
-    Time: O(V + E) where V = vertices, E = edges
-    Space: O(V) for visited dictionary and recursion stack
-    
-    ALGORITHM PATTERN: DFS with Memoization
-    - Visit each node exactly once: O(V)
-    - Process each edge exactly twice (bidirectional): O(E)  
-    - Total: O(V + E)
-    
-    This does NOT fit Master Theorem form T(n) = aT(n/b) + f(n)
-    because it's graph traversal, not divide-and-conquer.
-    
-    COGNITIVE LOAD ANALYSIS:
-    - Function parameters: 1 (follows 7±2 rule)
-    - Nesting depth: 2 levels (within cognitive limits)
-    - Single responsibility: clone graph structure
-    
-    Args:
-        node: Optional[Node] - entry point to graph
-    
-    Returns:
-        Optional[Node] - entry point to cloned graph
-        
-    ALGORITHM INVARIANTS:
-    1. Each original node maps to exactly one clone
-    2. Clone preserves all neighbor relationships  
-    3. Clone nodes are independent objects
-    4. Graph connectivity is preserved
-    
-    IMPLEMENTATION GUIDANCE (Following Laws of Nature):
-    
-    1. BASE CASE (Law of Error Proneness):
-       # Handle null input to prevent crashes
-       # TODO: Check if node is None, return None if so
-    
-    2. MEMOIZATION SETUP (Law of Limited Working Memory):
-       # Use dictionary to track visited nodes (original -> clone mapping)  
-       # TODO: Create empty dictionary to store visited nodes
-    
-    3. DFS HELPER FUNCTION (Law of Chunking):
-       # Separate recursive logic into helper function
-       # TODO: Define inner function dfs(original_node) that:
-       #   a) Checks if node already visited (return cached clone)
-       #   b) Creates new clone with same value
-       #   c) Stores clone in visited map
-       #   d) Recursively processes all neighbors
-       #   e) Returns completed clone
-    
-    4. RECURSIVE PATTERN (Law of Sequential Processing):
-       # Follow consistent order: check -> create -> store -> recurse -> return
-       # TODO: In dfs helper:
-       #   - First: if original_node in visited: return visited[original_node]
-       #   - Second: cloned_node = Node(original_node.val)
-       #   - Third: visited[original_node] = cloned_node
-       #   - Fourth: for each neighbor, recursively clone and append
-       #   - Fifth: return cloned_node
-    
-    5. MAIN FUNCTION CALL (Law of Pattern Recognition):
-       # TODO: Call dfs(node) and return result
-    
-    COMMON ERRORS TO AVOID (Law of Error Proneness):
-    - Forgetting to handle None input
-    - Creating infinite recursion (store clone BEFORE processing neighbors)
-    - Using wrong data structures for visited tracking
-    - Forgetting to connect cloned neighbors properly
+    """
+    deep copy
     """
 
     def dfs(original_node):
