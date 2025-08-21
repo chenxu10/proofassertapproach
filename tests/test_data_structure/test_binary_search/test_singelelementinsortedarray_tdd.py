@@ -21,3 +21,13 @@ def test_single_element_at_beginning():
 
 def test_single_element_in_middle():
     assert singleNonDuplicate([1, 1, 2, 3, 3]) == 2
+
+
+def test_five_elements_middle():
+    assert singleNonDuplicate([1, 1, 3, 4, 4]) == 3
+
+
+def test_need_to_check_middle_first():
+    # This test will help us think about checking the middle
+    # Current implementation scans from left, but what if we could be smarter?
+    assert singleNonDuplicate([2, 2, 3, 4, 4, 5, 5]) == 3
