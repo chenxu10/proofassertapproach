@@ -37,6 +37,48 @@ def isSubtree(root, subRoot):
     Returns:
         bool - True if subRoot is a subtree of root, False otherwise
     
+    Algorithm Mental Model (Data Flow Diagram):
+    ==========================================
+    
+    Main Tree:        3              SubRoot:     4
+                     / \                         / \
+                    4   5                       1   2
+                   / \
+                  1   2
+    
+    Step-by-Step Data Flow:
+    ┌─────────────────────────────────────────────────────────────────┐
+    │ 1. isSubtree(root=3, subRoot=[4,1,2])                          │
+    │    ├─ Base Cases: root≠None, subRoot≠None → Continue           │
+    │    ├─ isSameTree(3, 4) → False (values don't match)           │
+    │    └─ Recurse: isSubtree(left=4) OR isSubtree(right=5)        │
+    │                                                                │
+    │ 2. isSubtree(root=4, subRoot=[4,1,2])                          │
+    │    ├─ isSameTree(4, 4) → Check structure match                │
+    │    │  ├─ Values match: 4 == 4 ✓                              │
+    │    │  ├─ Left subtrees: isSameTree(1, 1) ✓                   │
+    │    │  └─ Right subtrees: isSameTree(2, 2) ✓                  │
+    │    └─ Returns: True → FOUND MATCH!                            │
+    └─────────────────────────────────────────────────────────────────┘
+    
+    Traversal Pattern (Preorder):
+    ┌───┬───┬───┬───┬───┐
+    │ 3 │ 4 │ 1 │ 2 │ 5 │  ← Check each node as potential subtree root
+    └───┴───┴───┴───┴───┘
+      ↓   ↓   ↓   ↓   ↓
+      ✗   ✓   ✗   ✗   ✗    ← Only node 4 produces exact match
+    
+    Two-Phase Algorithm:
+    Phase 1: Traverse main tree to find candidate nodes
+    Phase 2: For each candidate, perform deep structural comparison
+    
+    ┌─ Traversal Strategy ─┐    ┌─ Comparison Strategy ─┐
+    │ • Visit each node    │    │ • Compare values      │
+    │ • Check if potential │ → │ • Recurse left       │
+    │ • Continue if no     │    │ • Recurse right      │
+    │   match found        │    │ • All must match     │
+    └─────────────────────┘    └──────────────────────┘
+    
     Hints:
     - Think about two main operations: finding potential matching nodes and comparing subtrees
     - Consider using a helper function to check if two trees are identical
