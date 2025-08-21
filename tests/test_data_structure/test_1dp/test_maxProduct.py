@@ -2,20 +2,6 @@ import unittest
 from typing import List
 
 def maxProduct(nums: List[int]) -> int:
-    # not nums return None
-    # n = len(nums)
-    # dp = [None] * n
-    # dp[0] = nums[0]
-    # return nums[0]
-
-    # dp[i] the largest product up until i
-    # max_ending at current postion min_ending at curren position
-
-    # transition function max(dp[i], dp[i] * nums[i - 1])
-    # return max(dp)
-
-
-    # [-3 2] [2] [-6]
     if not nums:
         return 0
     
