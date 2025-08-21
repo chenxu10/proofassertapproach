@@ -13,3 +13,11 @@ def test_single_element():
 
 def test_single_element_at_end():
     assert singleNonDuplicate([1, 1, 2]) == 2
+
+
+def test_single_element_at_beginning():
+    assert singleNonDuplicate([1, 2, 2]) == 1
+
+
+def test_single_element_in_middle():
+    assert singleNonDuplicate([1, 1, 2, 3, 3]) == 2
