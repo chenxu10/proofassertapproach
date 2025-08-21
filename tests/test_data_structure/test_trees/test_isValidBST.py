@@ -50,8 +50,8 @@ def isValidBST(root):
             return False
         
         # Recursively validate left and right subtrees with updated bounds
-        return (validate(node.left, min_val, node.val) and 
-                validate(node.right, node.val, max_val))
+        return (validate(node.left, min_val = min_val, max_val = node.val) and 
+                validate(node.right, min_val = node.val, max_val = max_val))
     
     return validate(root, float('-inf'), float('inf'))
 
