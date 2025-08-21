@@ -5,27 +5,21 @@ def singleNonDuplicate(nums):
     left = 0
     right = len(nums) - 1
     
-    # Try to be smarter: check middle first to see if we can eliminate half
-    if len(nums) == 1:
-        return nums[0]
+    # Apply middle-checking recursively (true binary search)
+    while left < right:
+        mid = (left + right) // 2
         
-    mid = len(nums) // 2
+        # Make mid even for proper pair checking
+        if mid % 2 == 1:
+            mid -= 1
+        
+        # If middle element pairs with next, single is in right half
+        if nums[mid] == nums[mid + 1]:
+            left = mid + 2  # Recursively apply to right half
+        else:
+            right = mid     # Recursively apply to left half (including mid)
     
-    # Make mid even for proper pair checking
-    if mid % 2 == 1:
-        mid -= 1
-    
-    # If middle element pairs with next, single is in right half
-    if mid + 1 < len(nums) and nums[mid] == nums[mid + 1]:
-        # Single element must be in right half, but still scan linearly for now
-        for i in range(mid + 2, right + 1, 2):
-            if i == right or nums[i] != nums[i + 1]:
-                return nums[i]
-    else:
-        # Single element is in left half (including mid), scan linearly
-        for i in range(left, mid + 1, 2):
-            if i == mid or nums[i] != nums[i + 1]:
-                return nums[i]
+    return nums[left]
 
 
 def test_single_element():
@@ -64,3 +58,8 @@ def test_should_check_middle_to_eliminate_half():
     # At position 2 (middle), we have 5. If 5 != nums[3], we know answer is in left half
     # This should drive us toward binary search thinking
     assert singleNonDuplicate([1, 1, 5, 6, 6]) == 5
+
+
+def test_recursive_middle_checking():
+    # This case should drive us to apply middle-checking recursively (true binary search)
+    assert singleNonDuplicate([1, 1, 2, 2, 3, 3, 4, 5, 5]) == 4
