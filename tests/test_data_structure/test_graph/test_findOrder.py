@@ -53,7 +53,7 @@ def findOrderDFS(numCourses, prerequisites):
     # get init by indegrere
 
     result = []
-    visited = {0 for _ in range(numCourses)} #-1 visiting 0 not visited 1 visited
+    visited = [0 for _ in range(numCourses)] #-1 visiting 0 not visited 1 visited
     graph = defaultdict(list)
 
     def dfs(n):
