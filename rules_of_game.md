@@ -66,3 +66,30 @@ T(n) = Θ(n log n)
 # Shu
 - 如何构造Test Case First
     - 0树，只有1个根，1个根两个叶子，平衡的，偏向一边的，有一边有平衡的
+
+# Problem Solving as a Nature Selection Process
+
+Where is the source of selection?
+
+- Source 1(Consequences to Guide Further Search)
+various paths are tried out,
+the consequences of following them are noted, and
+this information is used to guide further search.
+- Source 2(Previoulsy solved problems and path lead to that solution)
+
+- If you can recall from your memory, next time it will be easier to recall
+- Pre-tesing before reading even with low performance will enhance your furture performance
+- Timing of self quiz is more important than how many times you review(non-linear 20 minutes 50% of content is gone from your memory)
+- Leverage visualization and diagram to make you see things at a glance. To detect change.
+We are much much better at change detection and process images than figures.
+- Replace symbols and figures with people and social context.
+Hard:If a card is blue, than it is odd.
+Easy:If she is drinking beer than she must be over 16.
+- Respect for symmetry and asymmetry. Once reach a stable state, reproduce in symmetrical way.
+    - Meaning eyes and hand moving in block and indentation manner
+- Always start from a simple solution or system that works for you in real world and DO NOT start and design from scratch.
+    - Start from an axioms and previoulsy proved theorems
+    - Not to do things to hurt yourself and catch profit when opportunity comes
+    - Each trial can be independently and not re-do
+    - Which should be tried first and which leads makes you progress
+- With stable hierarichial state, the search and build time can be reduced to log2(N) N=level times
