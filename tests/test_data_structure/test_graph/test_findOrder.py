@@ -64,7 +64,7 @@ def findOrderDFS(numCourses, prerequisites):
             return False
         if visited[n] == 1:
             return True
-        visited[nei] == -1
+        visited[nei] = -1
         
         for nei in graph[n]:
             if not dfs(nei):
