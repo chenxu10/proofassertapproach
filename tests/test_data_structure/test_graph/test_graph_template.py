@@ -5,6 +5,7 @@ def graph_dfs_template(node):
     # check cache visited:
         # directl return
     # operation on node
-    # recursive on nei of node
+    # find neighbors(recursive on nei of node)
+        # property of neighbors
     # update cache(visited)
     pass
