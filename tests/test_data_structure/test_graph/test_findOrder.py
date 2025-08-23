@@ -41,6 +41,49 @@ def findOrder(numCourses, prerequisites):
         return []
 
 
+def findOrderDFS(numCourses, prerequisites):
+    # assert 0--> 1
+    #        0 --> 2  2-->3
+    #  [0,1,2,3] 
+
+    # construct a graph
+    # indegree
+
+    # bfs graph to turn result
+    # get init by indegrere
+
+    result = []
+    visited = {0 for _ in range(numCourses)} #-1 visiting 0 not visited 1 visited
+    graph = defaultdict(list)
+
+    def dfs(n):
+        """
+        This function returns True if no circle is detected there is circle and add node along the way
+        """
+        if visited[n] == -1:
+            return False
+        if visited[n] == 1:
+            return True
+        visited[nei] == -1
+        
+        for nei in graph[n]:
+            if not dfs(nei):
+                return False
+                
+        result.append(n)
+        visited[n] = 1
+        return True
+
+    for dep, pre in prerequisites:
+        graph[pre].append(dep)
+    # put nodes with 0 indegree to queue
+    for n in range(numCourses):
+        if visited[n] == 0:
+            if not dfs(n):
+                return []
+
+    return result[::-1]
+
 class TestFindOrder(unittest.TestCase):
     
     def test_simple_linear_order(self):
