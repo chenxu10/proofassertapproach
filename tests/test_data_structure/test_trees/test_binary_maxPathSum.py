@@ -116,9 +116,7 @@ def maxPathSum(node):
     2. What's the difference between "path through node" vs "path from node"?
     3. Why return only one direction (left OR right) to parent?
     """
-    # TODO 1: Initialize global maximum. What should be the initial value?
-    # Hint: Consider what happens with all-negative trees
-    global_max_sum = float('-inf')  # Safe initial value for all cases including all-negative trees
+    
 
     def post_order_traversal(node):
         """
@@ -127,43 +125,23 @@ def maxPathSum(node):
         
         Think: Why do we need both return value AND side effect?
         """
-        nonlocal global_max_sum
-        
-        # TODO 2: Base case - what to return for empty node?
-        # Hint: What value doesn't affect parent's sum calculation?
         if not node:
-            return 0  # Return 0 so it doesn't contribute to parent's calculation
+            return 0, float('-inf')  
             
-        # TODO 3: Get maximum contributions from children
-        # Hint: Postorder means process children first. Why?
-        left_contribution = post_order_traversal(node.left)  # Get raw contribution from left
-        right_contribution = post_order_traversal(node.right)  # Get raw contribution from right
+        left_from_node, left_in_subtree  = post_order_traversal(node.left)  
+        right_from_node, rigth_in_subtree = post_order_traversal(node.right)  
         
-        # Only take positive contributions (ignore negative paths)
-        left_max = max(0, left_contribution)
-        right_max = max(0, right_contribution)
+        left_max = max(0, left_from_node)
+        right_max = max(0, right_from_node)
         
-        # TODO 4: Calculate path THROUGH current node (left → node → right)
-        # This is a candidate for global maximum but can't extend to parent
-        # Why? Because it uses BOTH left and right paths
-        current_max = node.val + left_max + right_max
-        
-        # TODO 5: Update global maximum
-        # Compare current path through this node with global best
-        global_max_sum = max(current_max, global_max_sum)
+        path_from_node = node.val + max(left_max,right_max)
+        path_through_node = node.val + left_max + right_max
+        max_in_subtree = max(path_through_node, left_in_subtree, rigth_in_subtree)
             
-        # TODO 6: Return path FROM this node (extending upward)
-        # Key insight: Can only choose ONE direction (left OR right) + current node
-        # Why? Because parent can only connect through current node in one direction
-        return node.val + max(left_max, right_max)  # Return max path from this node upward
-        
-        # Reflection Questions:
-        # - Why can't we return current_max to parent?
-        # - What would happen if we always chose both left_max + right_max?
-        # - How does this handle negative contributions?
-
-    post_order_traversal(node)
-    return global_max_sum
+        return path_from_node, max_in_subtree
+    
+    _, max_sum_result = post_order_traversal(node)
+    return max_sum_result
 
 class TreeNode:
     """Binary tree node definition for testing"""
