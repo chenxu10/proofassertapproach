@@ -62,6 +62,14 @@ def findOrderDFS(numCourses, prerequisites):
     result = []
     visited = [0 for _ in range(numCourses)] #-1 visiting 0 not visited 1 visited
     graph = defaultdict(list)
+    
+    def traverse_all_unmarked_node():
+        for n in range(numCourses):
+            if visited[n] == 0:
+                if not dfs(n):
+                    return []
+        else:
+            return result[::-1]
 
     def dfs(n):
         """
@@ -83,13 +91,8 @@ def findOrderDFS(numCourses, prerequisites):
 
     for dep, pre in prerequisites:
         graph[pre].append(dep)
-    # put nodes with 0 indegree to queue
-    for n in range(numCourses):
-        if visited[n] == 0:
-            if not dfs(n):
-                return []
-
-    return result[::-1]
+    
+    return traverse_all_unmarked_node()
 
 class TestFindOrder(unittest.TestCase):
     
