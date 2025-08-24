@@ -2,23 +2,44 @@ import pytest
 from collections import deque
 
 def ladderLength(beginWord, endWord, wordList):
+    if endWord not in wordList:
+        return 0
+    
+    word_set = set(wordList)
+    return _bfs_shortest_path(beginWord, endWord, word_set)
 
-    queue = deque([(beginWord, 1)])
-    visited = set([beginWord])
+def _generate_neighbors(word, word_set):
+    """Generate all valid neighbor words by changing one character at a time."""
+    neighbors = []
+    for i in range(len(word)):
+        for c in "abcdefghijklmnopqrstuvwxyz":
+            if c != word[i]:  # Skip same character
+                neighbor = word[:i] + c + word[i+1:]
+                if neighbor in word_set:
+                    neighbors.append(neighbor)
+    return neighbors
 
+def _bfs_shortest_path(start_word, target_word, word_set):
+    """BFS traversal to find shortest transformation sequence length."""
+    queue = deque([(start_word, 1)])
+    visited = {start_word}
+    
     while queue:
-        word, step = queue.popleft()
-        if word == endWord:
-            return step
+        current_word, steps = queue.popleft()
         
-        for i in range(len(word)):
-            for c in "abcdefghijklmnopqrstuvwxyz":
-                new_word = word[:i] + c + word[i+1:]
-                if new_word not in visited and new_word in wordList:
-                    queue.append((new_word, step + 1))
-                    visited.add(new_word)
+        if current_word == target_word:
+            return steps
+            
+        _explore_neighbors(current_word, steps, queue, visited, word_set)
     
     return 0
+    for neighbor in _generate_neighbors(word, word_set):
+        if neighbor not in visited:
+            queue.append((neighbor, current_steps + 1))
+            visited.add(neighbor)
+
+def _explore_neighbors(word, current_steps, queue, visited, word_set):
+    """Explore all unvisited neighbors and add them to queue."""
 
 class TestLadderLength:
     def test_example_1(self):
