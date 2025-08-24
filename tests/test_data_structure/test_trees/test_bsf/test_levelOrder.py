@@ -50,6 +50,12 @@ def levelOrder(node):
     
     Time: O(n), Space: O(w) where w is max width of tree
     """
+    def add_cur_node_to_cur_level(cur_level, cur_node):
+        if cur_node.left:
+            cur_level.append(cur_node.left)
+        if cur_node.right:
+            cur_level.append(cur_node.right)
+    
     if not node:
         return []
     
@@ -63,14 +69,12 @@ def levelOrder(node):
             cur_node = queue.popleft()
             cur_level.append(cur_node.val)
         
-            if cur_node.left:
-                cur_level.append(cur_node.left)
-            if cur_node.right:
-                cur_level.append(cur_node.right)
+            add_cur_node_to_cur_level(cur_level, cur_node)
 
         path.append(cur_level)
 
     return path
+
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
