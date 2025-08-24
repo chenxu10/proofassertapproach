@@ -2,13 +2,10 @@ import pytest
 from collections import deque
 
 def ladderLength(beginWord, endWord, wordList):
+
     queue = deque([(beginWord, 1)])
     visited = set([beginWord])
 
-
-    def generate_neighbors(word):
-        for c in "abcdefghijklmnopqrstuvwxyz":
-            new_word = word[:i] + c + word[i+1:]
     while queue:
         word, step = queue.popleft()
         if word == endWord:
