@@ -27,9 +27,9 @@ def numIslands(grid):
 
     rows, cols = len(grid), len(grid[0])
     visited = set()
-    islands = 0
     
-    def traverse_all_matrix(grid, islands):
+    def traverse_all_matrix(grid):
+        islands = 0
         for r in range(rows):
             for c in range(cols):
                 if grid[r][c] == '1' and (r, c) not in visited:
@@ -38,7 +38,7 @@ def numIslands(grid):
         return islands
 
 
-    islands = traverse_all_matrix(grid, 0)
+    islands = traverse_all_matrix(grid)
     return islands
 
 class TestNumIslands:
