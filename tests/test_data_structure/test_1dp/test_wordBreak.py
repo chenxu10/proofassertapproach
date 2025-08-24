@@ -110,4 +110,4 @@ class TestWordBreak:
         assert word_break(s, word_dict) == True
 
 if __name__ == "__main__":
-    detcode = pytest.main()
+    detcode = pytest.main(plugins=[(TestWordBreak)])
