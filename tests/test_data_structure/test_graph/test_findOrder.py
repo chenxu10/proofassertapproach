@@ -75,18 +75,24 @@ def findOrderDFS(numCourses, prerequisites):
         """
         This function returns True if no circle is detected there is circle and add node along the way
         """
+
+        def mark_with_temp():
+            visited[n] = -1
+
+        def mark_with_permanent():
+            visited[n] = 1
+        
         if visited[n] == -1:
             return False
         if visited[n] == 1:
             return True
-        visited[n] = -1
         
+        mark_with_temp()
         for nei in graph[n]:
             if not dfs(nei):
                 return False
-                
+        mark_with_permanent()
         result.append(n)
-        visited[n] = 1
         return True
 
     for dep, pre in prerequisites:
