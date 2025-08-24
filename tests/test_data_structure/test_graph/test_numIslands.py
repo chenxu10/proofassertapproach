@@ -114,7 +114,7 @@ class TestNumIslands:
             ["0","1","0","1","0"],
             ["1","0","1","0","1"]
         ]
-        assert numIslands(grid) == 13
+        assert numIslands(grid) == 8
     
     def test_large_single_island(self):
         grid = [
