@@ -37,10 +37,13 @@ class Solution:
             def is_valid_to_extend():
                 return nums[i] > nums[j]
             
+            def transition_dp_table():
+                dp[i] = max(dp[i], dp[j] + 1)
+            
             for i in range(1, len(nums)):  
                 for j in range(i):  
                     if is_valid_to_extend():
-                        dp[i] = max(dp[i], dp[j] + 1)
+                        transition_dp_table()
             return dp
         
         dp = update_dp_table(nums)
