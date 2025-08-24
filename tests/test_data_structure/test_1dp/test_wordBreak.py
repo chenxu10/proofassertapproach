@@ -108,3 +108,6 @@ class TestWordBreak:
         s = ""
         word_dict = ["a", "b"]
         assert word_break(s, word_dict) == True
+
+if __name__ == "__main__":
+    detcode = pytest.main()
