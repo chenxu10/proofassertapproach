@@ -31,8 +31,6 @@ class Solution:
             dp = [1] * len(nums)
             return dp
     
-        dp = initialize_dp_table()
-        
         def update_dp_table(nums):
             def is_valid_to_extend():
                 return nums[i] > nums[j]
@@ -46,6 +44,7 @@ class Solution:
                         transition_dp_table()
             return dp
         
+        dp = initialize_dp_table()
         dp = update_dp_table(nums)
 
         return max(dp)
