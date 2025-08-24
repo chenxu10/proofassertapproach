@@ -43,28 +43,25 @@ class Solution:
         In-order traversal of BST visits nodes in sorted order.
         We can stop early once we find the kth element.
         """
-        self.count = 0
-        self.result = None
-        
-        def inorder(node):
-            if not node or self.result is not None:
-                return
+        def inorder(node, count):
+            if not node:
+                return count, None
             
             # Traverse left subtree
-            inorder(node.left)
+            count, result = inorder(node.left, count)
+            if result is not None:
+                return count, result
             
             # Process current node
-            self.count += 1
-            if self.count == k:
-                self.result = node.val
-                return  
+            count += 1
+            if count == k:
+                return count, node.val
             
             # Traverse right subtree
-            inorder(node.right)
+            return inorder(node.right, count)
         
-        inorder(root)
-        return self.result
-
+        _, result = inorder(root, 0)
+        return result
 
 class TestKthSmallest(unittest.TestCase):
     
