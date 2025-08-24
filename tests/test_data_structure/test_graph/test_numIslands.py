@@ -9,63 +9,37 @@ def numIslands(grid):
     
     This is a classic connected components problem in graph theory!
     """
+    if not grid or not grid[0]:
+        return 0
     
-    # HINT 1: Edge case handling - what should you return for invalid inputs?
-    # Fill in: if not grid or not _____: return _____
-    
-    # HINT 2: Get grid dimensions for boundary checking
-    # Fill in: rows, cols = _____, _____
-    
-    # HINT 3: What data structure tracks visited cells efficiently?
-    # Fill in: visited = _____  # Think: set, list, or 2D boolean array?
-    
-    # HINT 4: Initialize counter for connected components (islands)
-    # Fill in: islands = _____
-    
-    # HINT 5: Choose your traversal strategy
-    # You can use DFS (recursive/iterative) or BFS. Which explores "deeper" first?
-    # Implement your traversal function here:
     
     def dfs(r, c):
-        # HINT 6: What are your base cases for recursion?
-        # Check bounds: r < 0 or r >= _____ or c < 0 or c >= _____
-        # Check if already visited: (r, c) in _____
-        # Check if water: grid[r][c] == _____
-        # Fill in: if (...): return
+        if (r < 0 or r >= rows or c < 0 or c >= cols or 
+            (r, c) in visited or grid[r][c] == '0'):
+            return
         
-        # HINT 7: Mark current cell as visited
-        # Fill in: visited._____(_____)
+        visited.add((r, c))
         
-        # HINT 8: Explore all 4 adjacent directions
-        # What are the 4 directions from cell (r,c)?
-        # Fill in the recursive calls:
-        # dfs(_____, _____)  # down
-        # dfs(_____, _____)  # up  
-        # dfs(_____, _____)  # right
-        # dfs(_____, _____)  # left
-        pass
+        dfs(r + 1, c)
+        dfs(r - 1, c)
+        dfs(r, c + 1)
+        dfs(r, c - 1)
+
+    rows, cols = len(grid), len(grid[0])
+    visited = set()
+    islands = 0
     
-    # HINT 9: Main algorithm - iterate through every cell
-    # Fill in the nested loops:
-    # for r in range(_____):
-    #     for c in range(_____):
-    
-    # HINT 10: When do you start a new DFS?
-    # You found an unvisited land cell - this starts a new island!
-    # Fill in: if grid[r][c] == _____ and (r, c) not in _____:
-    #     dfs(_____, _____)
-    #     islands += _____
-    
-    # HINT 11: Return the total count
-    # Fill in: return _____
-    
-    # BONUS CHALLENGES:
-    # 1. Can you implement this using BFS instead? How would you modify the approach?
-    # 2. Can you solve this using Union-Find (Disjoint Set Union)?
-    # 3. What's the time and space complexity of your solution?
-    # 4. How would you modify this to find the largest island?
-    
-    pass
+    def traverse_all_matrix(grid, islands):
+        for r in range(rows):
+            for c in range(cols):
+                if grid[r][c] == '1' and (r, c) not in visited:
+                    dfs(r, c)
+                    islands += 1
+        return islands
+
+
+    islands = traverse_all_matrix(grid, islands)
+    return islands
 
 class TestNumIslands:
     def test_example_1(self):
