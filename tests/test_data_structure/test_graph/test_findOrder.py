@@ -11,6 +11,12 @@ def findOrder(numCourses, prerequisites):
 
     # bfs graph to turn result
     # get init by indegrere
+    def append_new_neighbors_based_on_indegree(queue, indegree, dep):
+        if indegree[dep] == 0:
+            queue.append(dep)
+
+    def minus_indegree_after_visit(indegree, dep):
+        indegree[dep] -= 1
 
     result = []
     graph = defaultdict(list)
@@ -31,14 +37,14 @@ def findOrder(numCourses, prerequisites):
         result.append(course)
 
         for dep in graph[course]:
-            indegree[dep] -= 1
-            if indegree[dep] == 0:
-                queue.append(dep)
+            minus_indegree_after_visit(indegree, dep)
+            append_new_neighbors_based_on_indegree(queue, indegree, dep)
 
     if len(result) == numCourses:
         return result
     else:
         return []
+
 
 
 def findOrderDFS(numCourses, prerequisites):

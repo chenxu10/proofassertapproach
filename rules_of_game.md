@@ -8,7 +8,7 @@
 - Our brain treats skin in the game and non-skin in the game differently.
 - Increase your Germane Load, load to connect with your previously solved problem.
 - Be humble, know your constraints(working memory limits(avoid long parameters, nested structure, ambigious name, no helper function, jump to low level too soon, use chunk, use familiar pattern)).
-- Deducive and guess from the first principles. ### The Master Theorem
+- Deducive and guess from the first principles. The Master Theorem
 - Rest and break to make you recover
 - Stop loss, when stuck more than five minutes ask for help.
 - Fight first, do not give up under two minutes.
