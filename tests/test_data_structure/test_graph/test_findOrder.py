@@ -32,7 +32,6 @@ def findOrder(numCourses, prerequisites):
         graph[pre].append(dep)
         indegree[dep] += 1
 
-
     add_zero_indegree_nodes_to_queue(numCourses, queue, indegree)
 
     while queue:
