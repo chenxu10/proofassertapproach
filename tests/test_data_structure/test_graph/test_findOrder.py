@@ -18,7 +18,7 @@ def findOrder(numCourses, prerequisites):
     def minus_indegree_after_visit(indegree, dep):
         indegree[dep] -= 1
 
-    def add_zero_indegree_notes_to_queue(numCourses, queue, indegree):
+    def add_zero_indegree_nodes_to_queue(numCourses, queue, indegree):
         for n in range(numCourses):
             if indegree[n] == 0:
                 queue.append(n)
@@ -33,7 +33,7 @@ def findOrder(numCourses, prerequisites):
         indegree[dep] += 1
 
 
-    add_zero_indegree_notes_to_queue(numCourses, queue, indegree)
+    add_zero_indegree_nodes_to_queue(numCourses, queue, indegree)
 
     while queue:
         course = queue.popleft()
