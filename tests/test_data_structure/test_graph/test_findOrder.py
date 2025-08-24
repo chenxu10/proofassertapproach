@@ -18,6 +18,11 @@ def findOrder(numCourses, prerequisites):
     def minus_indegree_after_visit(indegree, dep):
         indegree[dep] -= 1
 
+    def add_zero_indegree_notes_to_queue(numCourses, queue, indegree):
+        for n in range(numCourses):
+            if indegree[n] == 0:
+                queue.append(n)
+    
     result = []
     graph = defaultdict(list)
     queue = deque()
@@ -27,10 +32,8 @@ def findOrder(numCourses, prerequisites):
         graph[pre].append(dep)
         indegree[dep] += 1
 
-    # put nodes with 0 indegree to queue
-    for n in range(numCourses):
-        if indegree[n] == 0:
-            queue.append(n)
+
+    add_zero_indegree_notes_to_queue(numCourses, queue, indegree)
 
     while queue:
         course = queue.popleft()
@@ -44,6 +47,7 @@ def findOrder(numCourses, prerequisites):
         return result
     else:
         return []
+
 
 
 
