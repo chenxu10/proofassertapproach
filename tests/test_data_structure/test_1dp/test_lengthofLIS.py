@@ -27,17 +27,25 @@ class Solution:
         if not nums:
             return 0
             
-        # TODO: Initialize DP array where dp[i] represents ___________
-        dp = [1] * len(nums)  # Hint: What's the minimum LIS length ending at any position?
+        def initialize_dp_table():
+            dp = [1] * len(nums)
+            return dp
+    
+        dp = initialize_dp_table()
         
-        # TODO: Fill the DP array
-        for i in range(1, len(nums)):  # Hint: Start from which index?
-            for j in range(i):  # Hint: Check which previous elements?
-                if nums[i] > nums[j]:  # Hint: When can we extend a subsequence?
-                    dp[i] = max(dp[i], dp[j] + 1)  # Hint: How to update current position?
+        def update_dp_table(nums):
+            def is_valid_to_extend():
+                return nums[i] > nums[j]
+            
+            for i in range(1, len(nums)):  
+                for j in range(i):  
+                    if is_valid_to_extend():
+                        dp[i] = max(dp[i], dp[j] + 1)
+            return dp
         
-        # TODO: Return the maximum value from DP array
-        return max(dp)  # Hint: Why do we need max() here?
+        dp = update_dp_table(nums)
+
+        return max(dp)
 
 class TestLengthOfLIS(unittest.TestCase):
     
