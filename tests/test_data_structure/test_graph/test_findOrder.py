@@ -47,18 +47,12 @@ def findOrder(numCourses, prerequisites):
     else:
         return []
 
+def build_adjacent_list_graph(prerequisites, graph):
+    for dep, pre in prerequisites:
+        graph[pre].append(dep)
+    return graph
 
 def findOrderDFS(numCourses, prerequisites):
-    # assert 0--> 1
-    #        0 --> 2  2-->3
-    #  [0,1,2,3] 
-
-    # construct a graph
-    # indegree
-
-    # bfs graph to turn result
-    # get init by indegrere
-
     result = []
     visited = [0 for _ in range(numCourses)] #-1 visiting 0 not visited 1 visited
     graph = defaultdict(list)
@@ -95,10 +89,9 @@ def findOrderDFS(numCourses, prerequisites):
         result.append(n)
         return True
 
-    for dep, pre in prerequisites:
-        graph[pre].append(dep)
-    
+    build_adjacent_list_graph(prerequisites, graph)
     return traverse_all_unmarked_node()
+
 
 class TestFindOrder(unittest.TestCase):
     
