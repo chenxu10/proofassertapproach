@@ -2,15 +2,6 @@ import unittest
 from collections import defaultdict, deque
 
 def findOrder(numCourses, prerequisites):
-    # assert 0--> 1
-    #        0 --> 2  2-->3
-    #  [0,1,2,3] 
-
-    # construct a graph
-    # indegree
-
-    # bfs graph to turn result
-    # get init by indegrere
     def enque_children(queue, indegree, dep):
         if indegree[dep] == 0:
             queue.append(dep)
