@@ -37,7 +37,6 @@ def numIslands(grid):
                     islands += 1
         return islands
 
-
     islands = traverse_all_matrix(grid)
     return islands
 
