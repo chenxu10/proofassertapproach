@@ -15,7 +15,7 @@ def findOrder(numCourses, prerequisites):
         if indegree[dep] == 0:
             queue.append(dep)
 
-    def minus_indegree_after_visit(indegree, dep):
+    def remove_edge_from_graph(indegree, dep):
         indegree[dep] -= 1
 
     def add_zero_indegree_nodes_to_queue(numCourses, queue, indegree):
@@ -39,7 +39,7 @@ def findOrder(numCourses, prerequisites):
         result.append(course)
 
         for dep in graph[course]:
-            minus_indegree_after_visit(indegree, dep)
+            remove_edge_from_graph(indegree, dep)
             enque_children(queue, indegree, dep)
 
     if len(result) == numCourses:
