@@ -50,30 +50,29 @@ def levelOrder(node):
     
     Time: O(n), Space: O(w) where w is max width of tree
     """
-    def add_cur_node_to_cur_level(cur_level, cur_node):
-        if cur_node.left:
-            cur_level.append(cur_node.left)
-        if cur_node.right:
-            cur_level.append(cur_node.right)
+    def enqueue_children(queue, node):
+        if node.left:
+            queue.append(node.left)
+        if node.right:
+            queue.append(node.right)
     
     if not node:
         return []
     
-    path = []
+    result = []
     queue = deque([node])
 
     while queue:
         level_size = len(queue)
-        cur_level = []
+        current_level = []
         for _ in range(level_size):
-            cur_node = queue.popleft()
-            cur_level.append(cur_node.val)
-        
-            add_cur_node_to_cur_level(cur_level, cur_node)
+            current_node = queue.popleft()
+            current_level.append(current_node.val)
+            enqueue_children(queue, current_node)
 
-        path.append(cur_level)
+        result.append(current_level)
 
-    return path
+    return result
 
 
 class TreeNode:
@@ -86,18 +85,14 @@ class TreeNode:
 class TestLevelOrder:
     def test_empty_tree(self):
         """Test level order traversal of an empty tree"""
-        # TODO: Implement levelOrder function
-        # result = levelOrder(None)
-        # assert result == []
-        pass
+        result = levelOrder(None)
+        assert result == []
 
     def test_single_node(self):
         """Test level order traversal of a single node tree"""
         root = TreeNode(1)
-        # TODO: Implement levelOrder function
-        # result = levelOrder(root)
-        # assert result == [[1]]
-        pass
+        result = levelOrder(root)
+        assert result == [[1]]
 
     def test_complete_binary_tree(self):
         """Test level order traversal of a complete binary tree"""
@@ -112,10 +107,8 @@ class TestLevelOrder:
         root.right.left = TreeNode(15)
         root.right.right = TreeNode(7)
         
-        # TODO: Implement levelOrder function
-        # result = levelOrder(root)
-        # assert result == [[3], [9, 20], [15, 7]]
-        pass
+        result = levelOrder(root)
+        assert result == [[3], [9, 20], [15, 7]]
 
     def test_left_skewed_tree(self):
         """Test level order traversal of a left-skewed tree"""
@@ -128,10 +121,8 @@ class TestLevelOrder:
         root.left = TreeNode(2)
         root.left.left = TreeNode(3)
         
-        # TODO: Implement levelOrder function
-        # result = levelOrder(root)
-        # assert result == [[1], [2], [3]]
-        pass
+        result = levelOrder(root)
+        assert result == [[1], [2], [3]]
 
     def test_mixed_structure_tree(self):
         """Test level order traversal of a tree with mixed structure"""
@@ -150,7 +141,6 @@ class TestLevelOrder:
         root.right.right = TreeNode(6)
         root.left.left.left = TreeNode(7)
         
-        # TODO: Implement levelOrder function
-        # result = levelOrder(root)
-        # assert result == [[1], [2, 3], [4, 5, 6], [7]]
-        pass
+        result = levelOrder(root)
+        assert result == [[1], [2, 3], [4, 5, 6], [7]]
+
