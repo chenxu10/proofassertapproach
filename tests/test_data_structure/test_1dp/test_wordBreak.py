@@ -32,15 +32,15 @@ def word_break(s, word_dict):
     # s = "catdog" ["cat","apple"] --> False
 
     # initialize a dp table
-    n =  len(s)
-    dp =  [False] * (n + 1)
-    dp[0] = True
-
     def update_dp(i):
         for j in range(i):
             if dp[j] and s[j:i] in word_dict:
                 dp[i] = True
                 return
+
+    n =  len(s)
+    dp =  [False] * (n + 1)
+    dp[0] = True
 
     for i in range(1, n + 1):
         update_dp(i)
