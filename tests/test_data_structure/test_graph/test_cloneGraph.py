@@ -18,7 +18,7 @@ def cloneGraph(node: Optional[Node]) -> Optional[Node]:
         def recursive_operation_on_neighbors_of(original_node, clone_node):
             for nei in original_node.neighbors:
                 clone_node.neighbors.append(dfs(nei))
-                
+
         if original_node in visited:
             return visited[original_node]
         else:
@@ -26,7 +26,6 @@ def cloneGraph(node: Optional[Node]) -> Optional[Node]:
             recursive_operation_on_neighbors_of(original_node, clone_node)
             visited[original_node] = clone_node
             return clone_node
-
 
     visited = {}
     if node is None:
