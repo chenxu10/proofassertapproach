@@ -41,10 +41,10 @@ def word_break(s, word_dict):
             if dp[j] and s[j:i] in word_dict:
                 dp[i] = True
                 return
-    # figure out the transition function
+
     for i in range(1, n + 1):
         update_dp(i)
-    # return dp[n]
+
     return dp[n]
 
 class TestWordBreak:
