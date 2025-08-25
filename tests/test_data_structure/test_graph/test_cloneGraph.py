@@ -15,14 +15,18 @@ def cloneGraph(node: Optional[Node]) -> Optional[Node]:
         """
         clone vals and neighbors
         """
+        def recursive_operation_on_neighbors_of(original_node, clone_node):
+            for nei in original_node.neighbors:
+                clone_node.neighbors.append(dfs(nei))
+                
         if original_node in visited:
             return visited[original_node]
         else:
             clone_node = Node(original_node.val)
-            for nei in original_node.neighbors:
-                clone_node.neighbors.append(dfs(nei))
+            recursive_operation_on_neighbors_of(original_node, clone_node)
             visited[original_node] = clone_node
             return clone_node
+
 
     visited = {}
     if node is None:
