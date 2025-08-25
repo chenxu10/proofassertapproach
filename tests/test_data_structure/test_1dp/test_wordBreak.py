@@ -28,40 +28,26 @@ def word_break(s, word_dict):
     
     🎮 Your mission: Fill in the implementation below!
     """
-    # Step 1: Setup - what variables do you need?
-    # n = ?
-    # dp = ?
-    # word_set = ?
-    n = len(s)
-    dp = [False] * (n + 1)
-    word_set = set(word_dict)
-    
-    # Step 2: Base case - what should dp[0] be?
-    dp[0] = True  # Empty string is always segmentable
-    
-    # Step 3: Fill the DP table
-    for i in range(1, n + 1):
+    # s = "catdog" ["cat","dog"] --> True
+    # s = "catdog" ["cat","apple"] --> False
+
+    # initialize a dp table
+    n =  len(s)
+    dp =  [False] * (n + 1)
+
+    # base case
+    dp[0] = True
+
+    def update_dp(i):
         for j in range(i):
-            if dp[j] and s[j:i] in word_set:
+            if dp[j] and s[j:i] in word_dict:
                 dp[i] = True
-            else:
-                dp[i] = False  # Early termination for this position
-                
+                return
+    # figure out the transition function
+    for i in range(1, n + 1):
+        update_dp(i)
+    # return dp[n]
     return dp[n]
-    # Step 3: Fill the DP table
-    # for i in range(...):
-    #     for j in range(...):
-    #         # Check: if we can reach j AND s[j:i] is a valid word
-    #         if ... and ... in ...:
-    #             # Then we can reach position i
-    #             dp[i] = ...
-    #             break  # Early termination - why is this helpful?
-    
-    # Step 4: Return the answer
-    # return dp[?]
-    
-    # TODO: Replace this placeholder with your implementation
-    pass
 
 class TestWordBreak:
     def test_basic_segmentation(self):
