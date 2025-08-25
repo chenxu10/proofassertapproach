@@ -34,8 +34,6 @@ def word_break(s, word_dict):
     # initialize a dp table
     n =  len(s)
     dp =  [False] * (n + 1)
-
-    # base case
     dp[0] = True
 
     def update_dp(i):
