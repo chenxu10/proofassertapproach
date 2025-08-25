@@ -44,7 +44,8 @@ def word_break(s, word_dict):
         for j in range(i):
             if dp[j] and s[j:i] in word_set:
                 dp[i] = True
-                return  # Early termination for this position
+            else:
+                dp[i] = False  # Early termination for this position
                 
     return dp[n]
     # Step 3: Fill the DP table
