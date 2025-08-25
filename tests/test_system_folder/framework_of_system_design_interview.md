@@ -22,4 +22,4 @@
     ### Logging and health check
 
 ## Mistakes to avoid
-Time managemetn is the key. Do not dive into too much details until they tell you do.
+Time management is the key. Do not dive into too much details until they tell you do.
