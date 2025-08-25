@@ -17,7 +17,6 @@ Design a triage system that accepts user input, analyzes it using GPT-4o API, an
 ```
 Users: 1,000,000 active users
 Daily requests: 20 per user = 20M requests/day
-
 QPS: 20M / 86400 = ~231 req/s (avg), ~700 req/s (peak)
 Storage: ~15TB (3 years retention)
 Bandwidth: ~1.6MB/s average, ~5MB/s peak
