@@ -340,28 +340,14 @@ class LRUCache:
         
         TODO: Implement get operation
         """
-        # TDD HINT: For test_single_put_get to pass, this method needs to:
-        # 1. Check if key exists in the hash table
-        # 2. If exists: move node to head (most recently used) and return its value
-        # 3. If not exists: return -1
+
+        if key in self.cache:
+            node = self.cache[key]
+            self._move_to_head(node)
+            return node.val
         
-        # HINT: Check if key exists in the cache dictionary
-        # if key in self.cache:
+        return -1
         
-        # HINT: Get the node from cache
-        #     node = self.cache[key]
-        
-        # HINT: Move the accessed node to head (mark as most recently used)
-        #     self._move_to_head(node)
-        
-        # HINT: Return the node's value
-        #     return node.val
-        
-        # HINT: If key doesn't exist, return -1
-        # return -1
-        
-        # NOTE: This method makes the accessed item the most recently used
-        pass
 
     def put(self, key: int, value: int) -> None:
         """

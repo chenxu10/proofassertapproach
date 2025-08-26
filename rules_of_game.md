@@ -14,6 +14,8 @@
 - Fight first, do not give up under two minutes.
 
 # First principle
+Look at the unknowns: Find, Boolean, Create or transform a data structure, Count.
+
 The Master Theorem is a fundamental law for analyzing the time complexity of divide-and-conquer algorithms. It provides a mathematical framework that algorithm designers **must obey** when creating recursive solutions.
 
 #### Theorem Statement
