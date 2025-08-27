@@ -18,7 +18,7 @@ def solveNQueens(n):
     board = [['.' for _ in range(n)] for _ in range(n)]
     solutions = []
 
-    def is_safe(board, row, col, n):
+    def valid_safety_of(board, row, col, n):
         """
         Check if placing a queen at board[row][col] is safe.
         
@@ -51,7 +51,7 @@ def solveNQueens(n):
             return solutions
         else:
             for col in range(n):
-                if is_safe(board, row, col, n):
+                if valid_safety_of(board, row, col, n):
                     board[row][col] = 'Q'
                     backtrack(board, row + 1, col, n)
                     board[row][col] = '.'
