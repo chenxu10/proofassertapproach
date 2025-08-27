@@ -40,7 +40,7 @@ def solveNQueens(n):
                 return False
         return True
 
-    def iterate_all_columns_by(board, row):
+    def iterate_all_cols_by(board, row):
         for col in range(n):
             if valid_safety_of(board, row, col, n):
                 board[row][col] = 'Q'
@@ -53,7 +53,7 @@ def solveNQueens(n):
             solutions.append([''.join(row) for  row in board])
             return solutions
         else:
-            iterate_all_columns_by(board, row)
+            iterate_all_cols_by(board, row)
 
     board = [['.' for _ in range(n)] for _ in range(n)]
     solutions = []
