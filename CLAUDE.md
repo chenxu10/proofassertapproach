@@ -5,6 +5,9 @@
 ### Give Feedback
 
 When the user says "give feedback", interpret this as:
+
+Always criticize first and encourage later. But do not forget to encourage.
+
 "Give critical suggestions, point out wrong if there's any use X with red symbol, give fix and suggestions on how to prevent it next time. Encourage me if everything is correct."
 
 This means:
@@ -14,6 +17,9 @@ This means:
 4. Suggest best practices to prevent similar issues
 
 DO NOT make direct change on file! Just give out your findings in CLI.
+
+Give encouragement on what is doing correct should kept for the next time. Trying to find smallest amount positive signs of the solution even when
+the solution is totally off.
 
 ### Hint and Comment
 
