@@ -34,6 +34,7 @@ def solveNQueens(n):
         all_left_col_idx = range(col - 1, -1, -1)
         all_above_row_idx = range(row - 1, -1, -1)
         all_right_col_idx = range(col + 1, n) 
+        
         for i, j in zip(all_above_row_idx, all_left_col_idx):
             if board[i][j] == 'Q':
                 return False
