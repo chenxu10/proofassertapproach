@@ -13,10 +13,6 @@ def solveNQueens(n):
         represented as a list of strings, each string represents a row 
         of the chessboard with 'Q' for queen and '.' for empty space.
     """
-    # TODO: Implement the N-Queens solution using backtracking
-    # 1 ['Q'] 0 2[] 
-    board = [['.' for _ in range(n)] for _ in range(n)]
-    solutions = []
 
     def valid_safety_of(board, row, col, n):
         """
@@ -50,7 +46,7 @@ def solveNQueens(n):
                 board[row][col] = 'Q'
                 backtrack(board, row + 1, col, n)
                 board[row][col] = '.'
-                
+
     def backtrack(board, row, col, solutions):
         # base case
         if row == n:
@@ -59,7 +55,8 @@ def solveNQueens(n):
         else:
             iterate_all_columns_by(board, row)
 
-
+    board = [['.' for _ in range(n)] for _ in range(n)]
+    solutions = []
     backtrack(board, 0, n, solutions)
     return solutions
 
