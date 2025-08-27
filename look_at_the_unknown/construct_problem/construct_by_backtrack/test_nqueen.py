@@ -44,17 +44,21 @@ def solveNQueens(n):
                 return False
         return True
 
+    def iterate_all_columns_by(board, row):
+        for col in range(n):
+            if valid_safety_of(board, row, col, n):
+                board[row][col] = 'Q'
+                backtrack(board, row + 1, col, n)
+                board[row][col] = '.'
+                
     def backtrack(board, row, col, solutions):
         # base case
         if row == n:
             solutions.append([''.join(row) for  row in board])
             return solutions
         else:
-            for col in range(n):
-                if valid_safety_of(board, row, col, n):
-                    board[row][col] = 'Q'
-                    backtrack(board, row + 1, col, n)
-                    board[row][col] = '.'
+            iterate_all_columns_by(board, row)
+
 
     backtrack(board, 0, n, solutions)
     return solutions
