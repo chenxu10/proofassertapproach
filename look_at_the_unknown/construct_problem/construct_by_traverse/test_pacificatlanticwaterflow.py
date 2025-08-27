@@ -11,11 +11,44 @@ def pacificAtlantic(heights):
     Returns:
         List[List[int]]: List of [row, col] coordinates where water can reach both oceans
     """
-    # High level: for every element in matrix, dfs to see whether can hit both
-    # atlantic and pacific
-    # to simplify logic 
-    # I will create helper function can hit atlantic and pacific
-    # The backbone of algorithm should be similiar to number of islands
+    if not heights or not heights[0]:
+        return []
+    
+    m, n = len(heights), len(heights[0])
+    pacific_visited = [[False] * n for _ in range(m)]
+    atlantic_visited = [[False] * n for _ in range(m)]
+    
+    def dfs(i, j, visited, prev_height):
+        if (i < 0 or i >= m or j < 0 or j >= n or 
+            visited[i][j] or heights[i][j] < prev_height):
+            return
+        
+        visited[i][j] = True
+        directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        
+        for di, dj in directions:
+            dfs(i + di, j + dj, visited, heights[i][j])
+    
+    # Start DFS from Pacific edges (top and left)
+    for i in range(m):
+        dfs(i, 0, pacific_visited, heights[i][0])
+    for j in range(n):
+        dfs(0, j, pacific_visited, heights[0][j])
+    
+    # Start DFS from Atlantic edges (bottom and right)
+    for i in range(m):
+        dfs(i, n-1, atlantic_visited, heights[i][n-1])
+    for j in range(n):
+        dfs(m-1, j, atlantic_visited, heights[m-1][j])
+    
+    # Find cells that can reach both oceans
+    result = []
+    for i in range(m):
+        for j in range(n):
+            if pacific_visited[i][j] and atlantic_visited[i][j]:
+                result.append([i, j])
+    
+    return result
 
 
 
