@@ -47,7 +47,7 @@ def solveNQueens(n):
                 backtrack(board, row + 1, col, n)
                 board[row][col] = '.'
 
-    def backtrack(board, row, col, solutions):
+    def backtrack(board, row, solutions):
         if row == n:
             solutions.append([''.join(row) for  row in board])
             return solutions
