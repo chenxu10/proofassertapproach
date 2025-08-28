@@ -2,10 +2,14 @@ import pytest
 
 def canFinish(num_course, courses):
     visited = [0] * num_course
+
+    def build_graphs_from(num_course, courses):
+        course_graph = [[] for _ in range(num_course)]
+        for cor, pre in courses:
+            course_graph[pre].append(cor)
+        return course_graph
     
-    course_graph = [[] for _ in range(num_course)]
-    for cor, pre in courses:
-        course_graph[pre].append(cor)
+    course_graph = build_graphs_from(num_course, courses)
 
     def has_cycle(course):
         """
