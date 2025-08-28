@@ -5,6 +5,9 @@ def ladderLength(beginWord, endWord, wordList):
     queue = deque([(beginWord, 1)])
     visited = set([beginWord])
 
+    def is_target_reached(current_word, target_word):
+        return current_word == target_word
+
     def generate_neighbors(word):
         neighbors = []
         for i in range(len(word)):
@@ -15,7 +18,7 @@ def ladderLength(beginWord, endWord, wordList):
     
     while queue:
         word, step = queue.popleft()
-        if word == endWord:
+        if is_target_reached(word, endWord):
             return step
         
         neighbors = generate_neighbors(word)    
