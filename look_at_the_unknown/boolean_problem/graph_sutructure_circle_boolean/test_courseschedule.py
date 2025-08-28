@@ -9,8 +9,6 @@ def canFinish(num_course, courses):
             course_graph[pre].append(cor)
         return course_graph
     
-    course_graph = build_graphs_from(num_course, courses)
-
     def has_cycle(course):
         """
         Returns boolean to detect there's cycle or not
@@ -26,13 +24,18 @@ def canFinish(num_course, courses):
                 return True
         visited[course] = 1
         return False
+    
 
-    for i in range(num_course):
-        if visited[i] == 0:
-            if has_cycle(courses[i]):
-                return False
-        
-    return True
+    def traverse_not_visited(num_course):
+        for i in range(num_course):
+            if visited[i] == 0:
+                if has_cycle(courses[i]):
+                    return False
+        else:
+            return True
+    
+    course_graph = build_graphs_from(num_course, courses)
+    return traverse_not_visited(num_course)
 
 class TestCourseSchedule:
     
