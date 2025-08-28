@@ -29,7 +29,7 @@ def canFinish(num_course, courses):
     def traverse_not_visited(num_course):
         for i in range(num_course):
             if visited[i] == 0:
-                if has_cycle(courses[i]):
+                if has_cycle(i):
                     return False
         else:
             return True
