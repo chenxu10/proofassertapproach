@@ -1,8 +1,10 @@
 import pytest
 
 def canFinish(num_course, courses):
-    visited = [0] * num_course
-
+    """
+        traverse not visited  build graph
+    has cicrle
+    """
     def build_graphs_from(num_course, courses):
         course_graph = [[] for _ in range(num_course)]
         for cor, pre in courses:
@@ -14,9 +16,9 @@ def canFinish(num_course, courses):
         Returns boolean to detect there's cycle or not
         """
         if visited[course] == -1:
-            return False
-        if visited[course] == 1:
             return True
+        if visited[course] == 1:
+            return False
         
         visited[course] = -1
         for nei in course_graph[course]:
@@ -34,6 +36,7 @@ def canFinish(num_course, courses):
         else:
             return True
     
+    visited = [0] * num_course
     course_graph = build_graphs_from(num_course, courses)
     return traverse_not_visited(num_course)
 
