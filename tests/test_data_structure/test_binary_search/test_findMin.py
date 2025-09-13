@@ -39,7 +39,6 @@ def findMin(nums):
 
 
 class TestFindMin:
-    
     def test_single_element(self):
         """Test array with single element"""
         assert findMin([1]) == 1

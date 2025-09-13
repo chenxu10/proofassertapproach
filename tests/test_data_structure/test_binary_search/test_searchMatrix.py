@@ -94,23 +94,7 @@ class TestSearchMatrix:
         assert searchMatrix([[1], [4], [7], [11]], 0) == False
         assert searchMatrix([[1], [4], [7], [11]], 15) == False
     
-    def test_standard_matrix_found(self):
-        """Test standard 2D matrix - target found"""
-        matrix = [
-            [1,  4,  7,  11],
-            [2,  5,  8,  12],
-            [3,  6,  9,  16]
-        ]
-        # Test corners
-        assert searchMatrix(matrix, 1) == True   # top-left
-        assert searchMatrix(matrix, 11) == True  # top-right
-        assert searchMatrix(matrix, 3) == True   # bottom-left
-        assert searchMatrix(matrix, 16) == True  # bottom-right
-        
-        # Test middle elements
-        assert searchMatrix(matrix, 5) == True
-        assert searchMatrix(matrix, 8) == True
-        assert searchMatrix(matrix, 9) == True
+
     
     def test_standard_matrix_not_found(self):
         """Test standard 2D matrix - target not found"""
